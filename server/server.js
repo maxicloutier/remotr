@@ -1,20 +1,20 @@
 'use strict';
 
-// // Require MongoClient and access the database with the `uri` saved in the `.env` file.
-// const { MongoClient } = require('mongodb');
-// require('dotenv').config();
-// const { MONGO_URI } = process.env;
+// Require MongoClient and access the database with the `uri` saved in the `.env` file.
+const { MongoClient } = require('mongodb');
+require('dotenv').config();
+const { MONGO_URI } = process.env;
 
-// const options = {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// };
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+};
 
 // Import the needed node_modules
 const express = require('express');
 const morgan = require('morgan');
 
-express()
+const app = express()
   // Below are methods that are included in express(). We chain them for convenience.
   // --------------------------------------------------------------------------------
 
@@ -36,27 +36,24 @@ express()
       status: 404,
       error: 'Something went wrong',
     });
-  })
+  });
 
-  // Node spins up our server and sets it to listen on port 8000.
-  .listen(8000, () => console.log(`Listening on port 8000`));
+const setup = async () => {
+  // Create new client
+  const client = await new MongoClient(MONGO_URI, options);
 
-// const setup = async () => {
-//   // Create new client
-//   const client = await new MongoClient(MONGO_URI, options);
+  // Connect to client
+  await client.connect();
+  console.log('Connected');
 
-//   // Connect to client
-//   await client.connect();
-//   console.log('Connected');
+  // Connect to database
+  const db = client.db('remotr');
 
-//   // Connect to database
-//   const db = client.db('');
+  // Node spins up our server and sets it to listen on port 8000
+  app.listen(8000, () => {
+    console.log(`Listening on port 8000`);
+    app.locals.db = db;
+  });
+};
 
-//   // Node spins up our server and sets it to listen on port 8000
-//   app.listen(8000, () => {
-//     console.log(`Listening on port 8000`);
-//     app.locals.db = db;
-//   });
-// };
-
-// setup();
+setup();
