@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { CurrentUserContext } from "../CurrentUserContext";
+import { Context } from "../Context";
 
 const SignUp = () => {
-  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser } = useContext(Context);
 
   return null;
 };

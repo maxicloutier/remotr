@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { CurrentUserContext } from "./CurrentUserContext";
+import { Context } from "./Context";
 
 const Header = () => {
-  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+  const { currentUser, setCurrentUser } = useContext(Context);
 
   return (
     <Wrapper>

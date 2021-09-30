@@ -1,8 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState, useContext } from "react";
+import styled from "styled-components";
+import { Context } from "../Context";
 
 const Community = () => {
-  return;
+  const { candidates, setCandidates } = useContext(Context);
+
+  return null;
 };
 
 export default Community;

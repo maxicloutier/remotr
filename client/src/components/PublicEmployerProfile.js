@@ -1,8 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useContext } from "react";
+import styled from "styled-components";
+import { Context } from "../Context";
 
 const PublicEmployerProfile = () => {
-  return;
+  const {} = useContext(Context);
+
+  return null;
 };
 
 export default PublicEmployerProfile;
