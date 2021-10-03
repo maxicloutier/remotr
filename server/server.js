@@ -14,7 +14,17 @@ const options = {
 const express = require("express");
 const morgan = require("morgan");
 const { getJobsFromApi } = require("./admin-handlers");
-const { getCandidates } = require("./handlers");
+const {
+  getJobs,
+  getJobById,
+  getCandidates,
+  getCandidateById,
+  getEmployers,
+  getEmployerById,
+  handleSignIn,
+  handleSignUp,
+  postJob,
+} = require("./handlers");
 
 const app = express()
   // Below are methods that are included in express(). We chain them for convenience.
@@ -29,7 +39,15 @@ const app = express()
   // Add new endpoints here 👇
   // .get("/jobs", getJobsFromApi)
 
+  .get("/jobs", getJobs)
+  .get("/job/:_id", getJobById)
   .get("/candidates", getCandidates)
+  .get("/candidate/:_id", getCandidateById)
+  .get("/employers", getEmployers)
+  .get("employer/:_id", getEmployerById)
+  .post("/signin", handleSignIn)
+  .post("/signup", handleSignUp)
+  .post("/job", postJob)
 
   // Add new endpoints here 👆
   // ---------------------------------
