@@ -1,11 +1,16 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { Context } from "../Context";
+import { useHistory } from "react-router-dom";
 
 const MyEmployerProfile = () => {
   const { currentUser, setCurrentUser } = useContext(Context);
 
-  return;
+  const handleSignOut = () => {
+    setCurrentUser(null).then(() => history.push("/"));
+  };
+
+  return null;
 };
 
 export default MyEmployerProfile;

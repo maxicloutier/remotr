@@ -13,17 +13,23 @@ const options = {
 // Import the needed node_modules
 const express = require("express");
 const morgan = require("morgan");
-const { getJobsFromApi } = require("./admin-handlers");
 const {
   getJobs,
   getJobById,
   getCandidates,
   getCandidateById,
+  updateCandidate,
   getEmployers,
   getEmployerById,
+  updateEmployer,
   handleSignIn,
   handleSignUp,
+  handleSignOut,
   postJob,
+  updateJob,
+  sendApplication,
+  getApplications,
+  getApplicationById,
 } = require("./handlers");
 
 const app = express()
@@ -43,11 +49,18 @@ const app = express()
   .get("/job/:_id", getJobById)
   .get("/candidates", getCandidates)
   .get("/candidate/:_id", getCandidateById)
+  .put("/candidate/:_id", updateCandidate) // NEED HELP
   .get("/employers", getEmployers)
   .get("employer/:_id", getEmployerById)
+  .put("employer/:_id", updateEmployer) // NEED HELP
   .post("/signin", handleSignIn)
   .post("/signup", handleSignUp)
+  .post("/signout", handleSignOut) // USE IN FRONT END ONLY?
   .post("/job", postJob)
+  .put("/job/:_id", updateJob) // NEED HELP
+  .post("/application", sendApplication) // NOTE SURE ABOUT THIS ENDPOINT
+  .get("/applications", getApplications) // NOTE SURE ABOUT THIS ENDPOINT
+  .get("/application/:_id", getApplicationById) // NOTE SURE ABOUT THIS ENDPOINT
 
   // Add new endpoints here 👆
   // ---------------------------------

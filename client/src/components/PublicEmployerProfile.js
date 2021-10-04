@@ -1,9 +1,22 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Context } from "../Context";
+import { useParams } from "react-router-dom";
 
 const PublicEmployerProfile = () => {
-  const {} = useContext(Context);
+  const [employer, setEmployer] = useState(null);
+
+  const { _id } = useParams;
+
+  useEffect(() => {
+    fetch(`/employer/${_id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setEmployer(data);
+      })
+      .catch((error) => {
+        console.error(error, "Something went wrong");
+      });
+  }, []);
 
   return null;
 };

@@ -3,15 +3,17 @@ import styled from "styled-components";
 
 const Jobs = () => {
   const [jobList, setJobList] = useState(null);
-  const [status, setStatus] = useState("loading");
 
-  // useEffect(() => {
-  //   fetch("/jobs/")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch("/jobs")
+      .then((res) => res.json())
+      .then((data) => {
+        setJobList(data);
+      })
+      .catch((error) => {
+        console.error(error, "Something went wrong");
+      });
+  }, []);
 
   return null;
 };

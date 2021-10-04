@@ -1,13 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
-import MyCandidateProfile from './MyCandidateProfile';
-import MyEmployerProfile from './MyEmployerProfile';
+import React, { useContext } from "react";
+import styled from "styled-components";
+import { Context } from "../Context";
+import MyCandidateProfile from "./MyCandidateProfile";
+import MyEmployerProfile from "./MyEmployerProfile";
 
 const MyProfile = () => {
+  const { currentUser, setCurrentUser } = useContext(Context);
+
   return (
     <div>
-      <MyCandidateProfile />
-      <MyEmployerProfile />
+      {currentUser.usertype === "candidate" ? (
+        <MyCandidateProfile />
+      ) : (
+        <MyEmployerProfile />
+      )}
     </div>
   );
 };

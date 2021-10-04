@@ -1,13 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
-import PublicCandidateProfile from './PublicCandidateProfile';
-import PublicEmployerProfile from './PublicEmployerProfile';
+import React from "react";
+import styled from "styled-components";
+import PublicCandidateProfile from "./PublicCandidateProfile";
+import PublicEmployerProfile from "./PublicEmployerProfile";
 
 const PublicProfile = () => {
   return (
     <div>
-      <PublicCandidateProfile />
-      <PublicEmployerProfile />
+      {usertype === "candidate" ? ( // NEED HELP
+        <PublicCandidateProfile />
+      ) : (
+        <PublicEmployerProfile />
+      )}
     </div>
   );
 };

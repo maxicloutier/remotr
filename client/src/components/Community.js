@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { Context } from "../Context";
 
 const Community = () => {
-  const { candidates, setCandidates } = useContext(Context);
+  const { candidates, setCandidates, employers, setEmployers } =
+    useContext(Context);
 
   return null;
 };
