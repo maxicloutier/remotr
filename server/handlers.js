@@ -210,7 +210,7 @@ const handleSignUp = async (req, res) => {
 
     const foundUsername = await req.app.locals.db
       .collection("candidates")
-      .findOne({ username });
+      .findOne({ _id });
 
     const foundEmail = await req.app.locals.db
       .collection("candidates")
@@ -278,7 +278,7 @@ const handleSignUp = async (req, res) => {
 
     const foundUsername = await req.app.locals.db
       .collection("employers")
-      .findOne({ username });
+      .findOne({ _id });
 
     const foundEmail = await req.app.locals.db
       .collection("employers")
@@ -398,6 +398,8 @@ const sendApplication = async (req, res) => {
     resume,
   } = req.body;
 
+  const { jobId } = req.params;
+
   const newApplication = {
     _id: uuidv4(),
     date: moment().format("MMMM Do YYYY, h:mm a"),
@@ -415,14 +417,24 @@ const sendApplication = async (req, res) => {
     resume: resume,
   };
 
-  await req.app.locals.db.collection("jobs").insertOne(newApplication); // NOT RIGHT, TO REVIEW
+  await req.app.locals.db
+    .collection("jobs")
+    .updateOne({ _id: jobId }, { $push: { applications: newApplication } });
+
+  await req.app.locals.db
+    .collection("candidates")
+    .updateOne({ _id: jobId }, { $push: { applications: newApplication } }); // need update
+
   res
     .status(201)
     .json({ status: 201, message: "Success", data: newApplication });
 };
 
 // Get a list of all a candidate's job applications.
-const getApplications = async (req, res) => {};
+const getCandidateApplications = async (req, res) => {};
+
+// Get a list of all applications for a given job.
+const getJobApplications = async (req, res) => {};
 
 // Get a candidate's specific job application.
 const getApplicationById = async (req, res) => {};
@@ -442,6 +454,7 @@ module.exports = {
   postJob,
   updateJob,
   sendApplication,
-  getApplications,
+  getCandidateApplications,
+  getJobApplications,
   getApplicationById,
 };

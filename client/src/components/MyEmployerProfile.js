@@ -7,7 +7,8 @@ const MyEmployerProfile = () => {
   const { currentUser, setCurrentUser } = useContext(Context);
 
   const handleSignOut = () => {
-    setCurrentUser(null).then(() => history.push("/"));
+    setCurrentUser(null);
+    history.push("/");
   };
 
   return null;

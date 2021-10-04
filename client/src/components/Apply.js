@@ -3,12 +3,13 @@ import styled from "styled-components";
 import { Context } from "../Context";
 import { useHistory } from "react-router-dom";
 
-const Apply = () => {
+const Apply = ({ jobId }) => {
   const { currentUser, setCurrentUser } = useContext(Context);
 
   const history = useHistory();
 
-  fetch("/application", {
+  
+  fetch(`/job/${jobId}/application`, {
     method: "POST",
     body: JSON.stringify(data),
     headers: { "Content-Type": "application/json" },

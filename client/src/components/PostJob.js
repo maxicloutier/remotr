@@ -3,6 +3,14 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
 const PostJob = () => {
+  
+  
+  
+  
+  
+  
+  
+  
   fetch("/job", {
     method: "POST",
     body: JSON.stringify(data),
