@@ -5,30 +5,30 @@ import { useHistory } from "react-router-dom";
 
 const SignUp = () => {
   const initialStateCandidate = {
-    _id: "", ////
-    email: "", ////
-    password: "", ////
-    name: "", ////
-    about: "", ////
+    _id: "",
+    email: "",
+    password: "",
+    name: "",
+    about: "",
     degree: "",
     degree_duration: "",
-    employer: "", ////
+    employer: "",
     hobbies: "",
-    languages: "", ////
-    location: "", ////
-    phone: "", ////
-    position: "", ////
-    pronouns: "", ////
+    languages: "",
+    location: "",
+    phone: "",
+    position: "",
+    pronouns: "",
     school: "",
-    skills: "", ////
-    timezone: "", ////
-    title: "", ////
+    skills: "",
+    timezone: "",
+    title: "",
     looking: "",
-    picture: "", ////
+    picture: "",
     instagram: "",
     linkedin: "",
-    usertype: "", ////
-    confirm_password: "", ////
+    usertype: "",
+    confirm_password: "",
   };
 
   const initialStateEmployer = {
@@ -308,7 +308,7 @@ const SignUp = () => {
             <label for="confirm_password">Confirm Password</label>
             <input
               type="password"
-              placeholder="Confirm Password"
+              placeholder="Confirm password"
               name="confirm_password"
               onChange={(ev) => {
                 setCandidateFormData({
@@ -320,8 +320,8 @@ const SignUp = () => {
 
             <label for="picture">Link to Your Profile Picture</label>
             <input
-              type="text"
-              placeholder="Add Link Here"
+              type="url"
+              placeholder="Add link here"
               name="picture"
               onChange={(ev) => {
                 setCandidateFormData({
@@ -334,7 +334,7 @@ const SignUp = () => {
             <label for="name">Full Name</label>
             <input
               type="text"
-              placeholder="Full Name"
+              placeholder="Full name"
               name="name"
               onChange={(ev) => {
                 setCandidateFormData({
@@ -370,7 +370,7 @@ const SignUp = () => {
             <label for="location">Current Location</label>
             <input
               type="text"
-              placeholder="Current Location"
+              placeholder="Current location"
               name="location"
               onChange={(ev) => {
                 setCandidateFormData({
@@ -390,7 +390,7 @@ const SignUp = () => {
                 });
               }}
             >
-              <option value="Select your UTC" disabled selected>
+              <option value="" disabled selected>
                 Select your UTC
               </option>
               <option value="UTC -12 hours">UTC -12 hours</option>
@@ -404,9 +404,9 @@ const SignUp = () => {
               <option value="UTC -4 hours">UTC -4 hours</option>
               <option value="UTC -3 hours">UTC -3 hours</option>
               <option value="UTC -2 hours">UTC -2 hours</option>
-              <option value="UTC -1 hours">UTC -1 hours</option>
-              <option value="UTC +0 hours">UTC +0 hours</option>
-              <option value="UTC +1 hours">UTC +1 hours</option>
+              <option value="UTC -1 hours">UTC -1 hour</option>
+              <option value="UTC +0 hours">UTC +0 hour</option>
+              <option value="UTC +1 hours">UTC +1 hour</option>
               <option value="UTC +2 hours">UTC +2 hours</option>
               <option value="UTC +3 hours">UTC +3 hours</option>
               <option value="UTC +4 hours">UTC +4 hours</option>
@@ -423,7 +423,7 @@ const SignUp = () => {
             <label for="phone">Phone Number</label>
             <input
               type="tel"
-              placeholder="Phone Number"
+              placeholder="Phone number"
               name="phone"
               onChange={(ev) => {
                 setCandidateFormData({
@@ -436,7 +436,7 @@ const SignUp = () => {
             <label for="languages">Languages</label>
             <input
               type="text"
-              placeholder="Languages"
+              placeholder="What languages do you speak?"
               name="languages"
               onChange={(ev) => {
                 setCandidateFormData({
@@ -449,7 +449,7 @@ const SignUp = () => {
             <label for="title">Profile Headline</label>
             <input
               type="text"
-              placeholder="Profile Headline"
+              placeholder="Profile headline"
               name="title"
               onChange={(ev) => {
                 setCandidateFormData({
@@ -484,6 +484,18 @@ const SignUp = () => {
               }}
             />
 
+            <label for="looking">What Are You Looking For?</label>
+            <textarea
+              placeholder="What kind of opportunities are you looking for or interested in? What's important to you in a job?"
+              name="looking"
+              onChange={(ev) => {
+                setCandidateFormData({
+                  ...candidateFormData,
+                  looking: ev.target.value,
+                });
+              }}
+            ></textarea>
+
             <label for="position">Current Position</label>
             <input
               type="text"
@@ -513,7 +525,7 @@ const SignUp = () => {
             <label for="degree">Most Relevant or Latest Degree/Training</label>
             <input
               type="text"
-              placeholder="Degree/Training"
+              placeholder="Degree/training"
               name="degree"
               onChange={(ev) => {
                 setCandidateFormData({
@@ -523,22 +535,304 @@ const SignUp = () => {
               }}
             />
 
-            <label for="degree">Most Relevant or Latest Degree/Training</label>
+            <label for="school">Educational Institution</label>
             <input
               type="text"
-              placeholder="Degree/Training"
-              name="degree"
+              placeholder="University, school, association, etc."
+              name="school"
               onChange={(ev) => {
                 setCandidateFormData({
                   ...candidateFormData,
-                  degree: ev.target.value,
+                  school: ev.target.value,
+                });
+              }}
+            />
+
+            <label for="degree_duration">Degree Duration</label>
+            <input
+              type="text"
+              placeholder="Start and end of your degree"
+              name="degree_duration"
+              onChange={(ev) => {
+                setCandidateFormData({
+                  ...candidateFormData,
+                  degree_duration: ev.target.value,
+                });
+              }}
+            />
+
+            <label for="hobbies">Hobbies</label>
+            <input
+              type="text"
+              placeholder="Life's not all about work! What do you enjoy to do for fun?"
+              name="hobbies"
+              onChange={(ev) => {
+                setCandidateFormData({
+                  ...candidateFormData,
+                  hobbies: ev.target.value,
+                });
+              }}
+            />
+
+            <label for="linkedin">Link Your LinkedIn Profile Here</label>
+            <input
+              type="url"
+              placeholder="Optional, but recommended!"
+              name="linkedin"
+              onChange={(ev) => {
+                setCandidateFormData({
+                  ...candidateFormData,
+                  linkedin: ev.target.value,
+                });
+              }}
+            />
+
+            <label for="instagram">Link Your Instagram Profile Here</label>
+            <input
+              type="url"
+              placeholder="Optional, but recommended!"
+              name="instagram"
+              onChange={(ev) => {
+                setCandidateFormData({
+                  ...candidateFormData,
+                  instagram: ev.target.value,
+                });
+              }}
+            />
+
+            <div>
+              <button type="reset">Clear</button>
+              {readyToSubmit ? (
+                <button type="submit">Submit</button>
+              ) : (
+                <button type="submit" disabled>
+                  Submit
+                </button>
+              )}
+            </div>
+          </form>
+        )}
+        {usertype === "employer" && (
+          <form onSubmit={handleSubmitEmployer}>
+            <label for="_id">Username</label>
+            <input
+              type="text"
+              placeholder="Username"
+              name="_id"
+              onChange={(ev) => {
+                setEmployerFormData({
+                  ...employerFormData,
+                  _id: ev.target.value,
+                });
+              }}
+            />
+
+            <label for="name">Company Name</label>
+            <input
+              type="text"
+              placeholder="Company name"
+              name="name"
+              onChange={(ev) => {
+                setEmployerFormData({
+                  ...employerFormData,
+                  name: ev.target.value,
+                });
+              }}
+            />
+
+            <label for="logo">Link to Your Company Logo</label>
+            <input
+              type="url"
+              placeholder="Add link here"
+              name="logo"
+              onChange={(ev) => {
+                setEmployerFormData({
+                  ...employerFormData,
+                  logo: ev.target.value,
+                });
+              }}
+            />
+
+            <label for="website">Company Website</label>
+            <input
+              type="url"
+              placeholder="Add link here"
+              name="website"
+              onChange={(ev) => {
+                setEmployerFormData({
+                  ...employerFormData,
+                  website: ev.target.value,
+                });
+              }}
+            />
+
+            <label for="email">Email</label>
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              onChange={(ev) => {
+                setEmployerFormData({
+                  ...employerFormData,
+                  email: ev.target.value,
+                });
+              }}
+            />
+
+            <label for="password">Password</label>
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              onChange={(ev) => {
+                setEmployerFormData({
+                  ...employerFormData,
+                  password: ev.target.value,
+                });
+              }}
+            />
+
+            <label for="confirm_password">Confirm Password</label>
+            <input
+              type="password"
+              placeholder="Confirm password"
+              name="confirm_password"
+              onChange={(ev) => {
+                setEmployerFormData({
+                  ...employerFormData,
+                  confirm_password: ev.target.value,
+                });
+              }}
+            />
+
+            <label for="slogan">Company Slogan or Profile Headline</label>
+            <input
+              type="text"
+              placeholder="Slogan/headline"
+              name="slogan"
+              onChange={(ev) => {
+                setEmployerFormData({
+                  ...employerFormData,
+                  slogan: ev.target.value,
+                });
+              }}
+            />
+
+            <label for="about">About Your Company</label>
+            <textarea
+              placeholder="Introduce your company to potential candidates. What is your mission, your vision, your goals, your remote philosophy? Why are you a great employer?"
+              name="about"
+              onChange={(ev) => {
+                setEmployerFormData({
+                  ...employerFormData,
+                  about: ev.target.value,
+                });
+              }}
+            ></textarea>
+
+            <label for="industry">Industry</label>
+            <input
+              type="text"
+              placeholder="Industry"
+              name="industry"
+              onChange={(ev) => {
+                setEmployerFormData({
+                  ...employerFormData,
+                  industry: ev.target.value,
+                });
+              }}
+            />
+
+            <label for="employees">Number of Employees</label>
+            <input
+              type="text"
+              placeholder="This can be an approximate number"
+              name="employees"
+              onChange={(ev) => {
+                setEmployerFormData({
+                  ...employerFormData,
+                  employees: ev.target.value,
+                });
+              }}
+            />
+
+            <label for="location">Location</label>
+            <input
+              type="text"
+              placeholder="Headquarters, main locations, etc."
+              name="location"
+              onChange={(ev) => {
+                setEmployerFormData({
+                  ...employerFormData,
+                  location: ev.target.value,
+                });
+              }}
+            />
+
+            <label for="founded">When Was Your Company Founded?</label>
+            <input
+              type="text"
+              placeholder="Year of foundation"
+              name="founded"
+              onChange={(ev) => {
+                setEmployerFormData({
+                  ...employerFormData,
+                  founded: ev.target.value,
+                });
+              }}
+            />
+
+            <label for="type">Company Type</label>
+            <select
+              name="type"
+              onChange={(ev) => {
+                setEmployerFormData({
+                  ...employerFormData,
+                  type: ev.target.value,
+                });
+              }}
+            >
+              <option value="" disabled selected>
+                Select type
+              </option>
+              <option value="Public Company">Public Company</option>
+              <option value="Private Company">Private Company</option>
+              <option value="Partnership">Partnership</option>
+              <option value="Limited Liability Company">
+                Limited Liability Company
+              </option>
+              <option value="Nonprofit">Nonprofit</option>
+              <option value="Cooperative">Cooperative</option>
+              <option value="Other">Other</option>
+            </select>
+
+            <label for="specialties">Specialties</label>
+            <textarea
+              placeholder="List your company's specialties"
+              name="specialties"
+              onChange={(ev) => {
+                setEmployerFormData({
+                  ...employerFormData,
+                  specialties: ev.target.value,
+                });
+              }}
+            ></textarea>
+
+            <label for="benefits">
+              List a Few of Your Employee Benefits and Perks
+            </label>
+            <input
+              type="text"
+              placeholder="Benefits and perks"
+              name="benefits"
+              onChange={(ev) => {
+                setEmployerFormData({
+                  ...employerFormData,
+                  benefits: ev.target.value,
                 });
               }}
             />
           </form>
-        )}
-        {usertype === "employer" && (
-          <form onSubmit={handleSubmitEmployer}></form>
         )}
       </div>
     </div>
