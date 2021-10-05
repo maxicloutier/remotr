@@ -53,7 +53,9 @@ const SignIn = () => {
   return (
     <div>
       <h1>Sign In</h1>
+
       <p>Enter your information to sign in to your account.</p>
+
       <form onSubmit={handleSubmit}>
         <label for="usertype">User Type</label>
         <select
@@ -69,6 +71,7 @@ const SignIn = () => {
           <option value="candidate">Candidate</option>
           <option value="employer">Employer</option>
         </select>
+
         <label for="email">Email</label>
         <input
           type="email"
@@ -78,6 +81,7 @@ const SignIn = () => {
             setFormData({ ...formData, email: ev.target.value });
           }}
         />
+
         <label for="password">Password</label>
         <input
           type="password"
@@ -87,6 +91,16 @@ const SignIn = () => {
             setFormData({ ...formData, password: ev.target.value });
           }}
         />
+
+        <div>
+          {readyToSubmit ? (
+            <button type="submit">Confirm</button>
+          ) : (
+            <button type="submit" disabled>
+              Confirm
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );
