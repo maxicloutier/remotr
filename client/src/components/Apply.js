@@ -1,7 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Context } from "../Context";
 import { useHistory } from "react-router-dom";
+import { CircularProgressbarWithChildren } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import ChangingProgressProvider from "../progress-bar/ChangingProgressProvider";
 
 const Apply = ({
   jobId,
@@ -11,27 +14,45 @@ const Apply = ({
   title,
   candidate_required_location,
 }) => {
-  const initialState = {
-    company_name: company_name,
-    employerId: employerId,
-    company_logo_url: company_logo_url,
-    title: title,
-    jobId: jobId,
-    candidate_required_location: candidate_required_location,
-    name: currentUser.name,
-    candidateId: currentUser._id,
-    email: currentUser.email,
-    phone: currentUser.phone,
-    candidateLocation: currentUser.location,
-    languages: currentUser.languages,
-    profile: `/profile/${currentUser._id}`,
-    letter: "",
-    resume: "",
-  };
+  const { currentUser } = useContext(Context);
 
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState(null);
 
-  const { currentUser, setCurrentUser } = useContext(Context);
+  useEffect(() => {
+    if (!currentUser) {
+      // bouncer pattern
+      return;
+    }
+    const initialState = {
+      company_name: company_name,
+      employerId: employerId,
+      company_logo_url: company_logo_url,
+      title: title,
+      jobId: jobId,
+      candidate_required_location: candidate_required_location,
+      candidatePicture: currentUser.picture,
+      name: currentUser.name,
+      candidateId: currentUser._id,
+      email: currentUser.email,
+      phone: currentUser.phone,
+      candidateLocation: currentUser.location,
+      languages: currentUser.languages,
+      profile: `/candidate/${currentUser._id}`,
+      letter: "",
+      resume: "",
+    };
+    setFormData(initialState);
+  }, [currentUser]);
+
+  const {
+    name,
+    candidateId,
+    email,
+    phone,
+    candidateLocation,
+    languages,
+    profile,
+  } = formData || {};
 
   let readyToSubmit = false;
 
@@ -45,13 +66,14 @@ const Apply = ({
       title: title,
       jobId: jobId,
       candidate_required_location: candidate_required_location,
+      candidatePicture: currentUser.picture,
       name: currentUser.name,
       candidateId: currentUser._id,
       email: formData.email,
       phone: formData.phone,
       candidateLocation: formData.candidateLocation,
       languages: formData.languages,
-      profile: `http://localhost:3000/candidate/${currentUser._id}`,
+      profile: `/candidate/${currentUser._id}`,
       letter: formData.letter,
       resume: formData.resume,
     };
@@ -66,23 +88,7 @@ const Apply = ({
       );
     }
 
-    if (
-      formData.company_name !== "" &&
-      formData.employerId !== "" &&
-      formData.title !== "" &&
-      formData.candidate_required_location !== "" &&
-      formData.name !== "" &&
-      formData.candidateId !== "" &&
-      formData.email !== "" &&
-      formData.phone !== "" &&
-      formData.candidateLocation !== "" &&
-      formData.languages !== "" &&
-      formData.profile !== "" &&
-      formData.letter !== "" &&
-      formData.resume !== ""
-    ) {
-      readyToSubmit = true;
-    } else {
+    if (readyToSubmit === false) {
       alert("Please make sure that all required fields are filled in.");
     }
 
@@ -95,7 +101,7 @@ const Apply = ({
       .then((data) => {
         if (data.status === 201) {
           alert("Application successfully sent!");
-          history.push("/me");
+          history.push(`/me/${candidateId}`);
         } else {
           alert(
             "Something went wrong. Please make sure that all fields are filled in."
@@ -104,9 +110,57 @@ const Apply = ({
       });
   };
 
+  // useEffect(() => {
+  //   if (!formData) {
+  //     // bouncer pattern
+  //     return;
+  //   }
+  //   if (
+  //     formData.company_name !== "" &&
+  //     formData.employerId !== "" &&
+  //     formData.title !== "" &&
+  //     formData.candidate_required_location !== "" &&
+  //     candidatePicture !== "" &&
+  //     formData.name !== "" &&
+  //     formData.candidateId !== "" &&
+  //     formData.email !== "" &&
+  //     formData.phone !== "" &&
+  //     formData.candidateLocation !== "" &&
+  //     formData.languages !== "" &&
+  //     formData.profile !== "" &&
+  //     formData.letter !== "" &&
+  //     formData.resume !== ""
+  //   ) {
+  //     readyToSubmit = true;
+  //   }
+  // }, [formData]);
+
+  // if (!currentUser) {
+  //   return (
+  //     <Loading>
+  //       <ProgressBarContainer>
+  //         <ChangingProgressProvider values={[0, 20, 40, 60, 80, 100]}>
+  //           {(percentage) => (
+  //             <CircularProgressbarWithChildren value={percentage}>
+  //               <img
+  //                 style={{ width: 80, marginTop: -5 }}
+  //                 src="/assets/other/doge.png"
+  //                 alt="doge"
+  //               />
+  //               <div style={{ fontSize: 20 }}>
+  //                 <strong>{percentage}</strong> mate
+  //               </div>
+  //             </CircularProgressbarWithChildren>
+  //           )}
+  //         </ChangingProgressProvider>
+  //       </ProgressBarContainer>
+  //     </Loading>
+  //   );
+  // }
+
   return (
     <div>
-      {/* <form onSubmit={handleApply}>
+      <form onSubmit={handleApply}>
         <img src={company_logo_url} alt="Company Logo" />
         <p>{company_name}</p>
         <p>{title}</p>
@@ -208,9 +262,24 @@ const Apply = ({
             </button>
           )}
         </div>
-      </form> */}
+      </form>
     </div>
   );
 };
+
+const ProgressBarContainer = styled.div`
+  max-width: 200px;
+  margin-top: 30px;
+`;
+
+const Loading = styled.div`
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 100vw;
+  text-align: -webkit-center;
+`;
 
 export default Apply;

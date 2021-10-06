@@ -9,14 +9,14 @@ const getJobs = async (req, res) => {
   try {
     const allJobs = await req.app.locals.db.collection("jobs").find().toArray();
 
-    let jobList = [];
+    // let jobList = [];
 
-    for (let count = 0; count < 150; count++) {
-      const randomJob = allJobs[Math.floor(Math.random() * allJobs.length)];
-      jobList.push(randomJob);
-    }
+    // for (let count = 0; count < 150; count++) {
+    //   const randomJob = allJobs[Math.floor(Math.random() * allJobs.length)];
+    //   jobList.push(randomJob);
+    // }
 
-    res.status(200).json({ status: 200, message: "Success", data: jobList });
+    res.status(200).json({ status: 200, message: "Success", data: allJobs });
   } catch (error) {
     res.status(400).json({ status: 400, error: "Something went wrong" });
   }
@@ -26,9 +26,7 @@ const getJobs = async (req, res) => {
 const getJobById = async (req, res) => {
   const { _id } = req.params;
   try {
-    console.log("start");
     const oneJob = await req.app.locals.db.collection("jobs").findOne({ _id });
-    console.log(oneJob, "helloooooo");
 
     res
       .status(200)
@@ -46,6 +44,10 @@ const getEmployerJobs = async (req, res) => {
       .collection("jobs")
       .find({ employerId: _id })
       .toArray();
+
+    // if ((allEmployerJobs = [])) {
+    //   res.status(400).json({ status: 400, error: "Something went wrong" });
+    // }
 
     res.status(200).json({
       status: 200,
@@ -363,6 +365,7 @@ const sendApplication = async (req, res) => {
     company_logo_url,
     title,
     candidate_required_location,
+    candidatePicture,
     name,
     candidateId,
     email,
@@ -385,6 +388,7 @@ const sendApplication = async (req, res) => {
     title: title,
     jobId: jobId,
     candidate_required_location: candidate_required_location,
+    candidatePicture: candidatePicture,
     name: name,
     candidateId: candidateId,
     email: email,
@@ -394,6 +398,62 @@ const sendApplication = async (req, res) => {
     profile: profile,
     letter: letter,
     resume: resume,
+    via: "Applied directly on Remotr!",
+  };
+
+  await req.app.locals.db.collection("applications").insertOne(newApplication);
+
+  // await req.app.locals.db
+  //   .collection("jobs")
+  //   .updateOne({ _id: jobId }, { $push: { applications: newApplication } });
+
+  // await req.app.locals.db
+  //   .collection("candidates")
+  //   .updateOne(
+  //     { _id: candidateId },
+  //     { $push: { applications: newApplication } }
+  //   );
+
+  res
+    .status(201)
+    .json({ status: 201, message: "Success", data: newApplication });
+};
+
+// Handler for a candidate to send a job application.
+const saveApplication = async (req, res) => {
+  const {
+    company_name,
+    company_logo_url,
+    title,
+    jobId,
+    candidate_required_location,
+    candidatePicture,
+    name,
+    candidateId,
+    email,
+    phone,
+    candidateLocation,
+    languages,
+    profile,
+  } = req.body;
+
+  const newApplication = {
+    _id: uuidv4(),
+    date: moment().format("MMMM Do YYYY, h:mm a"),
+    company_name: company_name,
+    company_logo_url: company_logo_url,
+    title: title,
+    jobId: jobId,
+    candidate_required_location: candidate_required_location,
+    candidatePicture: candidatePicture,
+    name: name,
+    candidateId: candidateId,
+    email: email,
+    phone: phone,
+    candidateLocation: candidateLocation,
+    languages: languages,
+    profile: profile,
+    via: "Applied externally on Remotive.io",
   };
 
   await req.app.locals.db.collection("applications").insertOne(newApplication);
@@ -423,6 +483,10 @@ const getCandidateApplications = async (req, res) => {
       .collection("applications")
       .find({ candidateId: _id })
       .toArray();
+
+    // if ((allApplications = [])) {
+    //   res.status(400).json({ status: 400, error: "Something went wrong" });
+    // }
 
     res
       .status(200)
@@ -478,6 +542,7 @@ module.exports = {
   handleSignUp,
   postJob,
   sendApplication,
+  saveApplication,
   getCandidateApplications,
   getJobApplications,
   getApplicationById,

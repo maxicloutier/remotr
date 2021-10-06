@@ -34,7 +34,7 @@ const SignUpCandidate = ({ usertype }) => {
     initialStateCandidate
   );
 
-  const { currentUser, setCurrentUser } = useContext(Context);
+  const { setCurrentUser } = useContext(Context);
 
   let readyToSubmit = false;
 

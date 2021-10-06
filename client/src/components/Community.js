@@ -7,66 +7,66 @@ import "react-circular-progressbar/dist/styles.css";
 import ChangingProgressProvider from "../progress-bar/ChangingProgressProvider";
 
 const Community = () => {
-  const { candidates, setCandidates, employers, setEmployers } =
-    useContext(Context);
-  console.log(candidates);
+  const { candidates, employers } = useContext(Context);
+
+  if (!candidates || !employers) {
+    return (
+      <Loading>
+        <ProgressBarContainer>
+          <ChangingProgressProvider values={[0, 20, 40, 60, 80, 100]}>
+            {(percentage) => (
+              <CircularProgressbarWithChildren value={percentage}>
+                <img
+                  style={{ width: 80, marginTop: -5 }}
+                  src="/assets/other/doge.png"
+                  alt="doge"
+                />
+                <div style={{ fontSize: 20 }}>
+                  <strong>{percentage}</strong> mate
+                </div>
+              </CircularProgressbarWithChildren>
+            )}
+          </ChangingProgressProvider>
+        </ProgressBarContainer>
+      </Loading>
+    );
+  }
+
   return (
-    <div>
-      {candidates && employers ? (
-        <div>
-          <div>
-            {candidates.map((candidate) => {
-              return (
-                <Link to={`/profile/${candidate._id}`} key={candidate._id}>
-                  <CandidatePics
-                    src={candidate.picture}
-                    alt="Candidate Picture"
-                  />
-                  <p>{candidate.name}</p>
-                  <p>{candidate.location}</p>
-                  <p>{candidate._id}</p>
-                  <p>{candidate.title}</p>
-                </Link>
-              );
-            })}
-          </div>
-          <div>
-            {employers.map((employer) => {
-              return (
-                <Link to={`/profile/${employer._id}`} key={employer._id}>
-                  <CompanyLogos src={employer.logo} alt="Company Logo" />
-                  <p>{employer.name}</p>
-                  <p>{employer.industry}</p>
-                  <p>{employer._id}</p>
-                  <p>{employer.location}</p>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      ) : (
-        <Loading>
-          <ProgressBarContainer>
-            <ChangingProgressProvider values={[0, 20, 40, 60, 80, 100]}>
-              {(percentage) => (
-                <CircularProgressbarWithChildren value={percentage}>
-                  <img
-                    style={{ width: 80, marginTop: -5 }}
-                    src="/assets/other/doge.png"
-                    alt="doge"
-                  />
-                  <div style={{ fontSize: 20 }}>
-                    <strong>{percentage}</strong> mate
-                  </div>
-                </CircularProgressbarWithChildren>
-              )}
-            </ChangingProgressProvider>
-          </ProgressBarContainer>
-        </Loading>
-      )}
-    </div>
+    <Wrapper>
+      <div>
+        {candidates.map((candidate) => {
+          return (
+            <Link to={`/candidate/${candidate._id}`} key={candidate._id}>
+              <CandidatePics src={candidate.picture} alt="Candidate Picture" />
+              <p>{candidate.name}</p>
+              <p>{candidate.location}</p>
+              <p>{candidate._id}</p>
+              <p>{candidate.title}</p>
+            </Link>
+          );
+        })}
+      </div>
+      <div>
+        {employers.map((employer) => {
+          return (
+            <Link to={`/employer/${employer._id}`} key={employer._id}>
+              <CompanyLogos src={employer.logo} alt="Company Logo" />
+              <p>{employer.name}</p>
+              <p>{employer.industry}</p>
+              <p>{employer._id}</p>
+              <p>{employer.location}</p>
+            </Link>
+          );
+        })}
+      </div>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+`;
 
 const ProgressBarContainer = styled.div`
   max-width: 200px;

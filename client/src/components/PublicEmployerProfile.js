@@ -1,11 +1,14 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
+import { CircularProgressbarWithChildren } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import ChangingProgressProvider from "../progress-bar/ChangingProgressProvider";
 
 const PublicEmployerProfile = () => {
   const [employer, setEmployer] = useState(null);
 
-  const { _id } = useParams;
+  const { _id } = useParams();
 
   useEffect(() => {
     fetch(`/employer/${_id}`)
@@ -17,6 +20,31 @@ const PublicEmployerProfile = () => {
         console.error(error, "Something went wrong");
       });
   }, []);
+
+  console.log(employer);
+
+  if (!employer) {
+    return (
+      <Loading>
+        <ProgressBarContainer>
+          <ChangingProgressProvider values={[0, 20, 40, 60, 80, 100]}>
+            {(percentage) => (
+              <CircularProgressbarWithChildren value={percentage}>
+                <img
+                  style={{ width: 80, marginTop: -5 }}
+                  src="/assets/other/doge.png"
+                  alt="doge"
+                />
+                <div style={{ fontSize: 20 }}>
+                  <strong>{percentage}</strong> mate
+                </div>
+              </CircularProgressbarWithChildren>
+            )}
+          </ChangingProgressProvider>
+        </ProgressBarContainer>
+      </Loading>
+    );
+  }
 
   return (
     <div>
@@ -30,8 +58,6 @@ const PublicEmployerProfile = () => {
         <a href={employer.website}>Website</a>
         <p>Location: {employer.location}</p>
       </div>
-
-      <button onClick={handleSignOut}>Sign Out</button>
 
       <p>Type: {employer.type}</p>
       <p>Founded: {employer.founded}</p>
@@ -57,27 +83,23 @@ const PublicEmployerProfile = () => {
         <h3>Employee Benefits</h3>
         <p>{employer.benefits}</p>
       </div>
-
-      {/* <div>
-        <h3>My Jobs Posted on Remotr</h3>
-        <div>
-          {jobs ? (
-            jobs.map((job) => {
-              return (
-                <Link to={`/jobdashboard/:${job._id}`} key={job._id}>
-                  <p>{job.title}</p>
-                  <p>{job.candidate_required_location}</p>
-                  <p>{job.publication_date}</p>
-                </Link>
-              );
-            })
-          ) : (
-            <p>You haven't posted any jobs on Remotr yet.</p>
-          )}
-        </div>
-      </div> */}
     </div>
   );
 };
+
+const ProgressBarContainer = styled.div`
+  max-width: 200px;
+  margin-top: 30px;
+`;
+
+const Loading = styled.div`
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 100vw;
+  text-align: -webkit-center;
+`;
 
 export default PublicEmployerProfile;

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Context } from "./Context";
 
 const Header = () => {
-  const { currentUser, setCurrentUser } = useContext(Context);
+  const { currentUser } = useContext(Context);
 
   return (
     <Wrapper>
@@ -19,7 +19,6 @@ const Header = () => {
             HOME
           </StyledLink>
           <StyledLink to="/jobs">REMOTE JOBS</StyledLink>
-          <StyledLink to="/lifestyle">LIFESTYLE</StyledLink>
           <StyledLink to="/community">COMMUNITY</StyledLink>
           <StyledLink to="/creator">CREATOR</StyledLink>
           {!currentUser ? (
@@ -65,6 +64,8 @@ const Wrapper = styled.header`
   /* position: relative; */
   position: sticky;
   top: 0;
+  border-bottom: solid 4px lightseagreen;
+  z-index: 100;
 `;
 
 const SiteNameDiv = styled.div`

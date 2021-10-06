@@ -25,6 +25,7 @@ const {
   handleSignUp,
   postJob,
   sendApplication,
+  saveApplication,
   getCandidateApplications,
   getJobApplications,
   getApplicationById,
@@ -53,6 +54,7 @@ const app = express()
   .post("/signup", handleSignUp)
   .post("/job", postJob)
   .post("/job/:jobId/application", sendApplication) // NOTE SURE ABOUT THIS ENDPOINT
+  .post("/job/:jobId/externalApplication", saveApplication) // NOTE SURE ABOUT THIS ENDPOINT
   .get("/me/:_id/applications", getCandidateApplications) // NOTE SURE ABOUT THIS ENDPOINT
   .get("/job/:_id/applications", getJobApplications) // NOTE SURE ABOUT THIS ENDPOINT
   .get("/application/:_id", getApplicationById) // NOTE SURE ABOUT THIS ENDPOINT

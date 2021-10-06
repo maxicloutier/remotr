@@ -26,7 +26,7 @@ const SignUpEmployer = ({ usertype }) => {
   const [employerFormData, setEmployerFormData] =
     useState(initialStateEmployer);
 
-  const { currentUser, setCurrentUser } = useContext(Context);
+  const { setCurrentUser } = useContext(Context);
 
   let readyToSubmit = false;
 
