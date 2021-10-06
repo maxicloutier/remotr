@@ -1,22 +1,22 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import GlobalStyles from './components/GlobalStyles';
-import Header from './Header';
-import Home from './components/Home';
-import Jobs from './components/Jobs';
-import JobDetails from './components/JobDetails';
-import Apply from './components/Apply';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
-import MyProfile from './components/MyProfile';
-import ViewApplication from './components/ViewApplication';
-import PostJob from './components/PostJob';
-import JobDashboard from './components/JobDashboard';
-import PublicProfile from './components/PublicProfile';
-import RemoteLifestyle from './components/RemoteLifestyle';
-import Community from './components/Community';
-import Creator from './components/Creator';
-import Footer from './Footer';
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import GlobalStyles from "./components/GlobalStyles";
+import Header from "./Header";
+import Home from "./components/Home";
+import Jobs from "./components/Jobs";
+import JobDetails from "./components/JobDetails";
+import Apply from "./components/Apply";
+import SignIn from "./components/SignIn";
+import SignUp from "./components/SignUp";
+import MyProfile from "./components/MyProfile";
+import ViewApplication from "./components/ViewApplication";
+import PostJob from "./components/PostJob";
+import JobDashboard from "./components/JobDashboard";
+import PublicProfile from "./components/PublicProfile";
+import RemoteLifestyle from "./components/RemoteLifestyle";
+import Community from "./components/Community";
+import Creator from "./components/Creator";
+import Footer from "./Footer";
 
 const App = () => {
   return (
@@ -30,10 +30,10 @@ const App = () => {
         <Route path="/jobs">
           <Jobs />
         </Route>
-        <Route path="/jobs/:id">
+        <Route path="/job/:_id">
           <JobDetails />
         </Route>
-        <Route path="/apply">
+        <Route path="/job/:jobId/application">
           <Apply />
         </Route>
         <Route path="/signin">
@@ -45,16 +45,16 @@ const App = () => {
         <Route path="/me">
           <MyProfile />
         </Route>
-        <Route path="/application/:id">
+        <Route path="/application/:_id">
           <ViewApplication />
         </Route>
         <Route path="/postajob">
           <PostJob />
         </Route>
-        <Route path="/jobdashboard/:id">
+        <Route path="/jobdashboard/:_id">
           <JobDashboard />
         </Route>
-        <Route path="/profile/:username">
+        <Route path="/profile/:_id">
           <PublicProfile />
         </Route>
         <Route path="/lifestyle">

@@ -8,7 +8,15 @@ const moment = require("moment");
 const getJobs = async (req, res) => {
   try {
     const allJobs = await req.app.locals.db.collection("jobs").find().toArray();
-    res.status(200).json({ status: 200, message: "Success", data: allJobs });
+
+    let jobList = [];
+
+    for (let count = 0; count < 150; count++) {
+      const randomJob = allJobs[Math.floor(Math.random() * allJobs.length)];
+      jobList.push(randomJob);
+    }
+
+    res.status(200).json({ status: 200, message: "Success", data: jobList });
   } catch (error) {
     res.status(400).json({ status: 400, error: "Something went wrong" });
   }
@@ -19,6 +27,8 @@ const getJobById = async (req, res) => {
   const { _id } = req.params;
   try {
     const oneJob = await req.app.locals.db.collection("jobs").findOne({ _id });
+    console.log(oneJob);
+
     res
       .status(200)
       .json({ status: 200, message: "Success", id: _id, data: oneJob });
@@ -34,6 +44,7 @@ const getCandidates = async (req, res) => {
       .collection("candidates")
       .find()
       .toArray();
+
     res
       .status(200)
       .json({ status: 200, message: "Success", data: allCandidates });
@@ -49,30 +60,10 @@ const getCandidateById = async (req, res) => {
     const oneCandidate = await req.app.locals.db
       .collection("candidates")
       .findOne({ _id });
+
     res
       .status(200)
       .json({ status: 200, message: "Success", id: _id, data: oneCandidate });
-  } catch (error) {
-    res.status(400).json({ status: 400, error: "Something went wrong" });
-  }
-};
-
-// Update information for a specific candidate.
-const updateCandidate = async (req, res) => {
-  const { _id } = req.params;
-  const query = { _id };
-  const newValues = { $set: { ...req.body } };
-
-  try {
-    const updatedCandidate = await req.app.locals.db
-      .collection("candidates")
-      .updateOne(query, newValues);
-    res.status(200).json({
-      status: 200,
-      message: "Success",
-      id: _id,
-      data: updatedCandidate,
-    });
   } catch (error) {
     res.status(400).json({ status: 400, error: "Something went wrong" });
   }
@@ -85,6 +76,7 @@ const getEmployers = async (req, res) => {
       .collection("employers")
       .find()
       .toArray();
+
     res
       .status(200)
       .json({ status: 200, message: "Success", data: allEmployers });
@@ -100,30 +92,10 @@ const getEmployerById = async (req, res) => {
     const oneEmployer = await req.app.locals.db
       .collection("employers")
       .findOne({ _id });
+
     res
       .status(200)
       .json({ status: 200, message: "Success", id: _id, data: oneEmployer });
-  } catch (error) {
-    res.status(400).json({ status: 400, error: "Something went wrong" });
-  }
-};
-
-// Update information for a specific employer.
-const updateEmployer = async (req, res) => {
-  const { _id } = req.params;
-  const query = { _id };
-  const newValues = { $set: { ...req.body } };
-
-  try {
-    const updatedEmployer = await req.app.locals.db
-      .collection("employers")
-      .updateOne(query, newValues);
-    res.status(200).json({
-      status: 200,
-      message: "Success",
-      id: _id,
-      data: updatedEmployer,
-    });
   } catch (error) {
     res.status(400).json({ status: 400, error: "Something went wrong" });
   }
@@ -251,6 +223,7 @@ const handleSignUp = async (req, res) => {
       };
 
       await req.app.locals.db.collection("candidates").insertOne(newCandidate);
+
       res
         .status(201)
         .json({ status: 201, message: "Success", data: newCandidate });
@@ -311,6 +284,7 @@ const handleSignUp = async (req, res) => {
       };
 
       await req.app.locals.db.collection("employers").insertOne(newEmployer);
+
       res
         .status(201)
         .json({ status: 201, message: "Success", data: newEmployer });
@@ -320,62 +294,43 @@ const handleSignUp = async (req, res) => {
   }
 };
 
-// Handler for candidates and employers to sign out.
-const handleSignOut = async (req, res) => {};
-
 // Handler for an employer to post a job.
 const postJob = async (req, res) => {
   const {
-    company,
-    logo,
-    position,
+    company_name,
+    company_logo_url,
+    title,
     category,
-    location,
+    candidate_required_location,
     description,
-    responsibilities,
-    qualifications,
-    apply,
+    salary,
+    job_type,
+    employerId,
   } = req.body;
 
   try {
     const newJob = {
       _id: uuidv4(),
-      date: moment().format("MMMM Do YYYY"),
-      company: company,
-      logo: logo,
-      position: position,
+      publication_date: moment().format("MMMM Do YYYY"),
+      company_name: company_name,
+      company_logo_url: company_logo_url,
+      title: title,
       category: category,
-      location: location,
+      candidate_required_location: candidate_required_location,
       description: description,
-      responsibilities: responsibilities,
-      qualifications: qualifications,
-      apply: apply,
+      salary: salary,
+      job_type: job_type,
       applications: [],
+      exclusivity: "Remotr Employer Member",
     };
 
     await req.app.locals.db.collection("jobs").insertOne(newJob);
+
+    await req.app.locals.db
+      .collection("employers")
+      .updateOne({ _id: employerId }, { $push: { jobs: newJob } });
+
     res.status(201).json({ status: 201, message: "Success", data: newJob });
-  } catch (error) {
-    res.status(400).json({ status: 400, error: "Something went wrong" });
-  }
-};
-
-// Handler for an employer to update a job post.
-const updateJob = async (req, res) => {
-  const { _id } = req.params;
-  const query = { _id };
-  const newValues = { $set: { ...req.body } };
-
-  try {
-    const updatedJob = await req.app.locals.db
-      .collection("jobs")
-      .updateOne(query, newValues);
-    res.status(200).json({
-      status: 200,
-      message: "Success",
-      id: _id,
-      data: updatedJob,
-    });
   } catch (error) {
     res.status(400).json({ status: 400, error: "Something went wrong" });
   }
@@ -384,11 +339,12 @@ const updateJob = async (req, res) => {
 // Handler for a candidate to send a job application.
 const sendApplication = async (req, res) => {
   const {
-    company,
-    logo,
-    position,
-    jobLocation,
+    company_name,
+    company_logo_url,
+    title,
+    candidate_required_location,
     name,
+    candidateId,
     email,
     phone,
     candidateLocation,
@@ -403,10 +359,10 @@ const sendApplication = async (req, res) => {
   const newApplication = {
     _id: uuidv4(),
     date: moment().format("MMMM Do YYYY, h:mm a"),
-    company: company,
-    logo: logo,
-    position: position,
-    jobLocation: jobLocation,
+    company_name: company_name,
+    company_logo_url: company_logo_url,
+    title: title,
+    candidate_required_location: candidate_required_location,
     name: name,
     email: email,
     phone: phone,
@@ -423,7 +379,10 @@ const sendApplication = async (req, res) => {
 
   await req.app.locals.db
     .collection("candidates")
-    .updateOne({ _id: jobId }, { $push: { applications: newApplication } }); // need update
+    .updateOne(
+      { _id: candidateId },
+      { $push: { applications: newApplication } }
+    );
 
   res
     .status(201)
@@ -444,15 +403,11 @@ module.exports = {
   getJobById,
   getCandidates,
   getCandidateById,
-  updateCandidate,
   getEmployers,
   getEmployerById,
-  updateEmployer,
   handleSignIn,
   handleSignUp,
-  handleSignOut,
   postJob,
-  updateJob,
   sendApplication,
   getCandidateApplications,
   getJobApplications,

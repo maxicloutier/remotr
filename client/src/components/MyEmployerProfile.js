@@ -6,6 +6,8 @@ import { useHistory } from "react-router-dom";
 const MyEmployerProfile = () => {
   const { currentUser, setCurrentUser } = useContext(Context);
 
+  const history = useHistory();
+
   const handleSignOut = () => {
     setCurrentUser(null);
     history.push("/");

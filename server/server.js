@@ -18,15 +18,11 @@ const {
   getJobById,
   getCandidates,
   getCandidateById,
-  updateCandidate,
   getEmployers,
   getEmployerById,
-  updateEmployer,
   handleSignIn,
   handleSignUp,
-  handleSignOut,
   postJob,
-  updateJob,
   sendApplication,
   getCandidateApplications,
   getJobApplications,
@@ -43,28 +39,23 @@ const app = express()
 
   // Nothing to modify above this line
   // ---------------------------------
-  // Add new endpoints here 👇
-  // .get("/jobs", getJobsFromApi)
+  // Endpoints 👇
 
   .get("/jobs", getJobs)
   .get("/job/:_id", getJobById)
   .get("/candidates", getCandidates)
   .get("/candidate/:_id", getCandidateById)
-  .put("/candidate/:_id", updateCandidate) // NEED HELP
   .get("/employers", getEmployers)
   .get("/employer/:_id", getEmployerById)
-  .put("/employer/:_id", updateEmployer) // NEED HELP
   .post("/signin", handleSignIn)
   .post("/signup", handleSignUp)
-  .post("/signout", handleSignOut) // USE IN FRONT END ONLY?
   .post("/job", postJob)
-  .put("/job/:_id", updateJob) // NEED HELP
   .post("/job/:jobId/application", sendApplication) // NOTE SURE ABOUT THIS ENDPOINT
   .get("/candidate-applications", getCandidateApplications) // NOTE SURE ABOUT THIS ENDPOINT
   .get("/job-applications", getJobApplications) // NOTE SURE ABOUT THIS ENDPOINT
   .get("/application/:_id", getApplicationById) // NOTE SURE ABOUT THIS ENDPOINT
 
-  // Add new endpoints here 👆
+  // Endpoints 👆
   // ---------------------------------
   // Nothing to modify below this line
 

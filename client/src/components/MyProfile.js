@@ -5,15 +5,12 @@ import MyCandidateProfile from "./MyCandidateProfile";
 import MyEmployerProfile from "./MyEmployerProfile";
 
 const MyProfile = () => {
-  const { currentUser, setCurrentUser } = useContext(Context);
+  const { currentUser } = useContext(Context);
 
   return (
     <div>
-      {currentUser.usertype === "candidate" ? (
-        <MyCandidateProfile />
-      ) : (
-        <MyEmployerProfile />
-      )}
+      {currentUser.usertype === "candidate" && <MyCandidateProfile />}
+      {currentUser.usertype === "employer" && <MyEmployerProfile />}
     </div>
   );
 };

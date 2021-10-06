@@ -6,11 +6,11 @@ import PublicEmployerProfile from "./PublicEmployerProfile";
 const PublicProfile = () => {
   return (
     <div>
-      {usertype === "candidate" ? ( // NEED HELP
+      {/* {usertype === "candidate" ? ( 
         <PublicCandidateProfile />
       ) : (
         <PublicEmployerProfile />
-      )}
+      )} */}
     </div>
   );
 };

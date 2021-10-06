@@ -16,22 +16,15 @@ const SignIn = () => {
 
   const history = useHistory();
 
-  const handleSubmit = () => {
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation(); // Do I need this one?
+
     const data = {
       usertype: formData.usertype,
       email: formData.email,
       password: formData.password,
     };
-
-    let readyToSubmit = false;
-
-    if (
-      formData.usertype !== "" &&
-      formData.email !== "" &&
-      formData.password !== ""
-    ) {
-      readyToSubmit = true;
-    }
 
     fetch("/signin", {
       method: "POST",
@@ -43,12 +36,21 @@ const SignIn = () => {
         if (data.status === 200) {
           setCurrentUser(data.data);
           history.push("/");
-          console.log(data.data);
         } else {
           alert("User not found or wrong combination of email and password.");
         }
       });
   };
+
+  let readyToSubmit = false;
+
+  if (
+    formData.usertype !== "" &&
+    formData.email !== "" &&
+    formData.password !== ""
+  ) {
+    readyToSubmit = true;
+  }
 
   return (
     <div>

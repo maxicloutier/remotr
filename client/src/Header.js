@@ -29,13 +29,23 @@ const Header = () => {
             </>
           ) : (
             <>
-              <StyledLink to="/postajob">POST A JOB</StyledLink>
+              {currentUser.usertype === "employer" && (
+                <StyledLink to="/postajob">POST A JOB</StyledLink>
+              )}
               <MeLinkDiv>
                 <StyledLink to="/me">
-                  <ProfilePicture
-                    src="/assets/maxime.png"
-                    alt="User profile picture"
-                  />
+                  {currentUser.usertype === "candidate" && (
+                    <ProfilePicture
+                      src={currentUser.picture}
+                      alt="User profile picture"
+                    />
+                  )}
+                  {currentUser.usertype === "employer" && (
+                    <ProfilePicture
+                      src={currentUser.logo}
+                      alt="User profile picture"
+                    />
+                  )}
                   <Me>ME</Me>
                 </StyledLink>
               </MeLinkDiv>
@@ -52,7 +62,9 @@ const Wrapper = styled.header`
   display: flex;
   background-color: black;
   min-height: 75px;
-  position: relative;
+  /* position: relative; */
+  position: sticky;
+  top: 0;
 `;
 
 const SiteNameDiv = styled.div`
@@ -98,7 +110,7 @@ const StyledLink = styled(Link)`
 
 const MeLinkDiv = styled.div`
   position: relative;
-  width: 75px;
+  width: 80px;
 `;
 
 const ProfilePicture = styled.img`

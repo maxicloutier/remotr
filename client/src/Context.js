@@ -6,7 +6,6 @@ const ContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [candidates, setCandidates] = useState(null);
   const [employers, setEmployers] = useState(null);
-  // const allUsers = [...candidates, ...employers];
 
   useEffect(() => {
     fetch("/candidates")
