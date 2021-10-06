@@ -26,12 +26,33 @@ const getJobs = async (req, res) => {
 const getJobById = async (req, res) => {
   const { _id } = req.params;
   try {
+    console.log("start");
     const oneJob = await req.app.locals.db.collection("jobs").findOne({ _id });
-    console.log(oneJob);
+    console.log(oneJob, "helloooooo");
 
     res
       .status(200)
       .json({ status: 200, message: "Success", id: _id, data: oneJob });
+  } catch (error) {
+    res.status(400).json({ status: 400, error: "Something went wrong" });
+  }
+};
+
+// Get all jobs posted by a specific employer.
+const getEmployerJobs = async (req, res) => {
+  const { _id } = req.params;
+  try {
+    const allEmployerJobs = await req.app.locals.db
+      .collection("jobs")
+      .find({ employerId: _id })
+      .toArray();
+
+    res.status(200).json({
+      status: 200,
+      message: "Success",
+      id: _id,
+      data: allEmployerJobs,
+    });
   } catch (error) {
     res.status(400).json({ status: 400, error: "Something went wrong" });
   }
@@ -215,7 +236,6 @@ const handleSignUp = async (req, res) => {
         title: title,
         looking: looking,
         picture: picture,
-        applications: [],
         instagram: instagram,
         linkedin: linkedin,
         usertype: usertype,
@@ -275,7 +295,6 @@ const handleSignUp = async (req, res) => {
         founded: founded,
         specialties: specialties,
         logo: logo,
-        jobs: [],
         benefits: benefits,
         email: email,
         password: password,
@@ -313,6 +332,7 @@ const postJob = async (req, res) => {
       _id: uuidv4(),
       publication_date: moment().format("MMMM Do YYYY"),
       company_name: company_name,
+      employerId: employerId,
       company_logo_url: company_logo_url,
       title: title,
       category: category,
@@ -320,7 +340,6 @@ const postJob = async (req, res) => {
       description: description,
       salary: salary,
       job_type: job_type,
-      applications: [],
       exclusivity: "Remotr Employer Member",
     };
 
@@ -340,6 +359,7 @@ const postJob = async (req, res) => {
 const sendApplication = async (req, res) => {
   const {
     company_name,
+    employerId,
     company_logo_url,
     title,
     candidate_required_location,
@@ -360,10 +380,13 @@ const sendApplication = async (req, res) => {
     _id: uuidv4(),
     date: moment().format("MMMM Do YYYY, h:mm a"),
     company_name: company_name,
+    employerId: employerId,
     company_logo_url: company_logo_url,
     title: title,
+    jobId: jobId,
     candidate_required_location: candidate_required_location,
     name: name,
+    candidateId: candidateId,
     email: email,
     phone: phone,
     candidateLocation: candidateLocation,
@@ -373,16 +396,18 @@ const sendApplication = async (req, res) => {
     resume: resume,
   };
 
-  await req.app.locals.db
-    .collection("jobs")
-    .updateOne({ _id: jobId }, { $push: { applications: newApplication } });
+  await req.app.locals.db.collection("applications").insertOne(newApplication);
 
-  await req.app.locals.db
-    .collection("candidates")
-    .updateOne(
-      { _id: candidateId },
-      { $push: { applications: newApplication } }
-    );
+  // await req.app.locals.db
+  //   .collection("jobs")
+  //   .updateOne({ _id: jobId }, { $push: { applications: newApplication } });
+
+  // await req.app.locals.db
+  //   .collection("candidates")
+  //   .updateOne(
+  //     { _id: candidateId },
+  //     { $push: { applications: newApplication } }
+  //   );
 
   res
     .status(201)
@@ -390,17 +415,61 @@ const sendApplication = async (req, res) => {
 };
 
 // Get a list of all a candidate's job applications.
-const getCandidateApplications = async (req, res) => {};
+const getCandidateApplications = async (req, res) => {
+  const { _id } = req.params;
+
+  try {
+    const allApplications = await req.app.locals.db
+      .collection("applications")
+      .find({ candidateId: _id })
+      .toArray();
+
+    res
+      .status(200)
+      .json({ status: 200, message: "Success", data: allApplications });
+  } catch (error) {
+    res.status(400).json({ status: 400, error: "Something went wrong" });
+  }
+};
 
 // Get a list of all applications for a given job.
-const getJobApplications = async (req, res) => {};
+const getJobApplications = async (req, res) => {
+  const { _id } = req.params;
+
+  try {
+    const allApplications = await req.app.locals.db
+      .collection("applications")
+      .find({ jobId: _id })
+      .toArray();
+
+    res
+      .status(200)
+      .json({ status: 200, message: "Success", data: allApplications });
+  } catch (error) {
+    res.status(400).json({ status: 400, error: "Something went wrong" });
+  }
+};
 
 // Get a candidate's specific job application.
-const getApplicationById = async (req, res) => {};
+const getApplicationById = async (req, res) => {
+  const { _id } = req.params;
+  try {
+    const oneApplication = await req.app.locals.db
+      .collection("applications")
+      .findOne({ _id: _id });
+
+    res
+      .status(200)
+      .json({ status: 200, message: "Success", id: _id, data: oneApplication });
+  } catch (error) {
+    res.status(400).json({ status: 400, error: "Something went wrong" });
+  }
+};
 
 module.exports = {
   getJobs,
   getJobById,
+  getEmployerJobs,
   getCandidates,
   getCandidateById,
   getEmployers,

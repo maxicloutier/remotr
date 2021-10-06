@@ -24,7 +24,7 @@ const Apply = ({
     phone: currentUser.phone,
     candidateLocation: currentUser.location,
     languages: currentUser.languages,
-    profile: `http://localhost:3000/${currentUser._id}`,
+    profile: `/profile/${currentUser._id}`,
     letter: "",
     resume: "",
   };

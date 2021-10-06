@@ -16,6 +16,7 @@ const morgan = require("morgan");
 const {
   getJobs,
   getJobById,
+  getEmployerJobs,
   getCandidates,
   getCandidateById,
   getEmployers,
@@ -43,6 +44,7 @@ const app = express()
 
   .get("/jobs", getJobs)
   .get("/job/:_id", getJobById)
+  .get("/me/:_id/jobs", getEmployerJobs)
   .get("/candidates", getCandidates)
   .get("/candidate/:_id", getCandidateById)
   .get("/employers", getEmployers)
@@ -51,8 +53,8 @@ const app = express()
   .post("/signup", handleSignUp)
   .post("/job", postJob)
   .post("/job/:jobId/application", sendApplication) // NOTE SURE ABOUT THIS ENDPOINT
-  .get("/candidate-applications", getCandidateApplications) // NOTE SURE ABOUT THIS ENDPOINT
-  .get("/job-applications", getJobApplications) // NOTE SURE ABOUT THIS ENDPOINT
+  .get("/me/:_id/applications", getCandidateApplications) // NOTE SURE ABOUT THIS ENDPOINT
+  .get("/job/:_id/applications", getJobApplications) // NOTE SURE ABOUT THIS ENDPOINT
   .get("/application/:_id", getApplicationById) // NOTE SURE ABOUT THIS ENDPOINT
 
   // Endpoints 👆

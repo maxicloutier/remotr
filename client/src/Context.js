@@ -11,7 +11,7 @@ const ContextProvider = ({ children }) => {
     fetch("/candidates")
       .then((res) => res.json())
       .then((data) => {
-        setCandidates(data);
+        setCandidates(data.data);
       })
       .catch((error) => {
         console.error(error, "Something went wrong");
@@ -22,7 +22,7 @@ const ContextProvider = ({ children }) => {
     fetch("/employers")
       .then((res) => res.json())
       .then((data) => {
-        setEmployers(data);
+        setEmployers(data.data);
       })
       .catch((error) => {
         console.error(error, "Something went wrong");

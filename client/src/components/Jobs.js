@@ -55,7 +55,7 @@ const Jobs = () => {
           })}
         </JobsContainer>
       ) : (
-        <Div>
+        <Loading>
           <ProgressBarContainer>
             <ChangingProgressProvider values={[0, 20, 40, 60, 80, 100]}>
               {(percentage) => (
@@ -72,7 +72,7 @@ const Jobs = () => {
               )}
             </ChangingProgressProvider>
           </ProgressBarContainer>
-        </Div>
+        </Loading>
       )}
     </Wrapper>
   );
@@ -107,8 +107,8 @@ const StyledJob = styled(Link)`
 `;
 
 const Logo = styled.img`
-  max-width: 75px;
-  max-height: 75px;
+  max-width: 80px;
+  max-height: 80px;
   object-fit: contain;
 `;
 
@@ -128,7 +128,7 @@ const ProgressBarContainer = styled.div`
   max-width: 200px;
 `;
 
-const Div = styled.div`
+const Loading = styled.div`
   margin: 0;
   position: absolute;
   top: 50%;

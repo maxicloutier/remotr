@@ -12,7 +12,9 @@ import MyProfile from "./components/MyProfile";
 import ViewApplication from "./components/ViewApplication";
 import PostJob from "./components/PostJob";
 import JobDashboard from "./components/JobDashboard";
-import PublicProfile from "./components/PublicProfile";
+// import PublicProfile from "./components/PublicProfile";
+import PublicCandidateProfile from "./components/PublicCandidateProfile";
+import PublicEmployerProfile from "./components/PublicEmployerProfile";
 import RemoteLifestyle from "./components/RemoteLifestyle";
 import Community from "./components/Community";
 import Creator from "./components/Creator";
@@ -54,8 +56,11 @@ const App = () => {
         <Route path="/jobdashboard/:_id">
           <JobDashboard />
         </Route>
-        <Route path="/profile/:_id">
-          <PublicProfile />
+        <Route path="/candidate/:_id">
+          <PublicCandidateProfile />
+        </Route>
+        <Route path="/employer/:_id">
+          <PublicEmployerProfile />
         </Route>
         <Route path="/lifestyle">
           <RemoteLifestyle />
