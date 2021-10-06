@@ -6,14 +6,17 @@ import { useHistory } from "react-router-dom";
 const Apply = ({
   jobId,
   company_name,
+  employerId,
   company_logo_url,
   title,
   candidate_required_location,
 }) => {
   const initialState = {
     company_name: company_name,
+    employerId: employerId,
     company_logo_url: company_logo_url,
     title: title,
+    jobId: jobId,
     candidate_required_location: candidate_required_location,
     name: currentUser.name,
     candidateId: currentUser._id,
@@ -37,8 +40,10 @@ const Apply = ({
   const handleApply = () => {
     const data = {
       company_name: company_name,
+      employerId: employerId,
       company_logo_url: company_logo_url,
       title: title,
+      jobId: jobId,
       candidate_required_location: candidate_required_location,
       name: currentUser.name,
       candidateId: currentUser._id,
@@ -46,7 +51,7 @@ const Apply = ({
       phone: formData.phone,
       candidateLocation: formData.candidateLocation,
       languages: formData.languages,
-      profile: `http://localhost:3000/${currentUser._id}`,
+      profile: `http://localhost:3000/candidate/${currentUser._id}`,
       letter: formData.letter,
       resume: formData.resume,
     };
@@ -63,6 +68,7 @@ const Apply = ({
 
     if (
       formData.company_name !== "" &&
+      formData.employerId !== "" &&
       formData.title !== "" &&
       formData.candidate_required_location !== "" &&
       formData.name !== "" &&

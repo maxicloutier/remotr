@@ -12,6 +12,7 @@ const ViewApplication = () => {
       .then((res) => res.json())
       .then((data) => {
         setApplication(data);
+        console.log(data)
       })
       .catch((error) => {
         console.error(error, "Something went wrong");

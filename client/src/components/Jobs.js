@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { CircularProgressbarWithChildren } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import ChangingProgressProvider from "../progress-bar/ChangingProgressProvider";
 
 const Jobs = () => {
   const [jobList, setJobList] = useState(null);
+
+  let percentage;
 
   useEffect(() => {
     fetch("/jobs")
@@ -19,9 +24,9 @@ const Jobs = () => {
   return (
     <Wrapper>
       <PageTitle>Remote Jobs</PageTitle>
-      <JobsContainer>
-        {jobList &&
-          jobList.map((job) => {
+      {jobList ? (
+        <JobsContainer>
+          {jobList.map((job) => {
             return (
               <StyledJob to={`/job/${job._id}`} key={job._id}>
                 <LogoContainer>
@@ -48,7 +53,27 @@ const Jobs = () => {
               </StyledJob>
             );
           })}
-      </JobsContainer>
+        </JobsContainer>
+      ) : (
+        <Div>
+          <ProgressBarContainer>
+            <ChangingProgressProvider values={[0, 20, 40, 60, 80, 100]}>
+              {(percentage) => (
+                <CircularProgressbarWithChildren value={percentage}>
+                  <img
+                    style={{ width: 80, marginTop: -5 }}
+                    src="/assets/other/doge.png"
+                    alt="doge"
+                  />
+                  <div style={{ fontSize: 20 }}>
+                    <strong>{percentage}</strong> mate
+                  </div>
+                </CircularProgressbarWithChildren>
+              )}
+            </ChangingProgressProvider>
+          </ProgressBarContainer>
+        </Div>
+      )}
     </Wrapper>
   );
 };
@@ -97,6 +122,20 @@ const TitleContainer = styled.div`
 
 const DetailContainer = styled.div`
   width: 30%;
+`;
+
+const ProgressBarContainer = styled.div`
+  max-width: 200px;
+`;
+
+const Div = styled.div`
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 100vw;
+  text-align: -webkit-center;
 `;
 
 export default Jobs;

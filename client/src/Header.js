@@ -33,7 +33,7 @@ const Header = () => {
                 <StyledLink to="/postajob">POST A JOB</StyledLink>
               )}
               <MeLinkDiv>
-                <StyledLink to="/me">
+                <StyledLink to={`/me/${currentUser._id}`}>
                   {currentUser.usertype === "candidate" && (
                     <ProfilePicture
                       src={currentUser.picture}
