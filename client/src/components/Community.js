@@ -84,7 +84,7 @@ const CandidateContainer = styled.div`
   flex-direction: column;
 `;
 
-const CandidateLink = styled.div`
+const CandidateLink = styled(Link)`
   display: flex;
 `;
 const EmployerContainer = styled.div`
@@ -92,7 +92,7 @@ const EmployerContainer = styled.div`
   flex-direction: column;
 `;
 
-const EmployerLink = styled.div`
+const EmployerLink = styled(Link)`
   display: flex;
 `;
 

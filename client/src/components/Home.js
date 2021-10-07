@@ -68,7 +68,6 @@ const Video = styled.video`
   width: 100%;
   height: 100%;
   position: fixed;
-
   overflow: hidden;
   width: 100%;
   height: auto;

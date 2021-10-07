@@ -170,11 +170,13 @@ const JobDetails = () => {
             </div>
           ) : (
             <div>
-              <div>
-                <ExternalLink href={jobDescription.url} target="_blank">
-                  Apply Externally
-                </ExternalLink>
-              </div>
+              {!jobDescription.exclusivity && (
+                <ApplyButtons>
+                  <ExternalLink href={jobDescription.url} target="_blank">
+                    Apply Externally
+                  </ExternalLink>
+                </ApplyButtons>
+              )}
               <Warning>
                 You must be a candidate member and be signed in to apply for a
                 job on Remotr or to save a Remotive job to your profile. Sign in
