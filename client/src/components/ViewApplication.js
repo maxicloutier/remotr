@@ -58,6 +58,7 @@ const ViewApplication = () => {
       <Link to={`/job/${application.jobId}`}>Job Details</Link>
       <Link to={application.profile}>Candidate Profile</Link>
 
+      <img src={application.candidatePicture} alt="Candidate Picture" />
       <p>{application.name}</p>
       <p>Username: {application.candidateId}</p>
       <p>{application.email}</p>

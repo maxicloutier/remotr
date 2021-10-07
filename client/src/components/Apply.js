@@ -78,20 +78,6 @@ const Apply = ({
       resume: formData.resume,
     };
 
-    if (!formData.email.includes("@") || !formData.email.includes(".")) {
-      alert("Please enter a valid email address.");
-    }
-
-    if (formData.letter.length < 50) {
-      alert(
-        "Please make sure that your application message is at least 50 characters long."
-      );
-    }
-
-    if (readyToSubmit === false) {
-      alert("Please make sure that all required fields are filled in.");
-    }
-
     fetch(`/job/${jobId}/application`, {
       method: "POST",
       body: JSON.stringify(data),
@@ -103,60 +89,33 @@ const Apply = ({
           alert("Application successfully sent!");
           history.push(`/me/${candidateId}`);
         } else {
-          alert(
-            "Something went wrong. Please make sure that all fields are filled in."
-          );
+          alert(`${data.error}`);
         }
       });
   };
 
-  // useEffect(() => {
-  //   if (!formData) {
-  //     // bouncer pattern
-  //     return;
-  //   }
-  //   if (
-  //     formData.company_name !== "" &&
-  //     formData.employerId !== "" &&
-  //     formData.title !== "" &&
-  //     formData.candidate_required_location !== "" &&
-  //     candidatePicture !== "" &&
-  //     formData.name !== "" &&
-  //     formData.candidateId !== "" &&
-  //     formData.email !== "" &&
-  //     formData.phone !== "" &&
-  //     formData.candidateLocation !== "" &&
-  //     formData.languages !== "" &&
-  //     formData.profile !== "" &&
-  //     formData.letter !== "" &&
-  //     formData.resume !== ""
-  //   ) {
-  //     readyToSubmit = true;
-  //   }
-  // }, [formData]);
-
-  // if (!currentUser) {
-  //   return (
-  //     <Loading>
-  //       <ProgressBarContainer>
-  //         <ChangingProgressProvider values={[0, 20, 40, 60, 80, 100]}>
-  //           {(percentage) => (
-  //             <CircularProgressbarWithChildren value={percentage}>
-  //               <img
-  //                 style={{ width: 80, marginTop: -5 }}
-  //                 src="/assets/other/doge.png"
-  //                 alt="doge"
-  //               />
-  //               <div style={{ fontSize: 20 }}>
-  //                 <strong>{percentage}</strong> mate
-  //               </div>
-  //             </CircularProgressbarWithChildren>
-  //           )}
-  //         </ChangingProgressProvider>
-  //       </ProgressBarContainer>
-  //     </Loading>
-  //   );
-  // }
+  if (!currentUser) {
+    return (
+      <Loading>
+        <ProgressBarContainer>
+          <ChangingProgressProvider values={[0, 20, 40, 60, 80, 100]}>
+            {(percentage) => (
+              <CircularProgressbarWithChildren value={percentage}>
+                <img
+                  style={{ width: 80, marginTop: -5 }}
+                  src="/assets/other/doge.png"
+                  alt="doge"
+                />
+                <div style={{ fontSize: 20 }}>
+                  <strong>{percentage}</strong> mate
+                </div>
+              </CircularProgressbarWithChildren>
+            )}
+          </ChangingProgressProvider>
+        </ProgressBarContainer>
+      </Loading>
+    );
+  }
 
   return (
     <div>
@@ -254,13 +213,11 @@ const Apply = ({
 
         <div>
           <button type="reset">Clear</button>
-          {readyToSubmit ? (
-            <button type="submit">Submit</button>
-          ) : (
-            <button type="submit" disabled>
-              Submit
-            </button>
-          )}
+        </div>
+        <div>
+          <button type="submit" onClick={handleApply}>
+            Submit
+          </button>
         </div>
       </form>
     </div>

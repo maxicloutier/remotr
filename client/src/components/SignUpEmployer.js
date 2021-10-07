@@ -28,8 +28,6 @@ const SignUpEmployer = ({ usertype }) => {
 
   const { setCurrentUser } = useContext(Context);
 
-  let readyToSubmit = false;
-
   const history = useHistory();
 
   const handleSubmitEmployer = (ev) => {
@@ -56,56 +54,6 @@ const SignUpEmployer = ({ usertype }) => {
       confirm_password: employerFormData.confirm_password,
     };
 
-    if (employerFormData._id.length < 4) {
-      alert("Your username must be at least 4 characters long.");
-    }
-
-    if (
-      !employerFormData.email.includes("@") ||
-      !employerFormData.email.includes(".")
-    ) {
-      alert("Please enter a valid email address.");
-    }
-
-    const strongPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-
-    if (
-      !employerFormData.password.match(strongPassword) ||
-      !employerFormData.confirm_password.match(strongPassword)
-    ) {
-      alert(
-        "Please make sure your password contains at least 8 characters including letters and numbers."
-      );
-    }
-
-    if (employerFormData.password !== employerFormData.confirm_password) {
-      alert("Please make sure your password match.");
-    }
-
-    if (
-      employerFormData._id !== "" &&
-      employerFormData.name !== "" &&
-      employerFormData.slogan !== "" &&
-      employerFormData.industry !== "" &&
-      employerFormData.location !== "" &&
-      employerFormData.employees !== "" &&
-      employerFormData.about !== "" &&
-      employerFormData.website !== "" &&
-      employerFormData.type !== "" &&
-      employerFormData.founded !== "" &&
-      employerFormData.specialties !== "" &&
-      employerFormData.logo !== "" &&
-      employerFormData.benefits !== "" &&
-      employerFormData.email !== "" &&
-      employerFormData.password !== "" &&
-      usertype !== "" &&
-      employerFormData.confirm_password !== ""
-    ) {
-      readyToSubmit = true;
-    } else {
-      alert("Please make sure that all required fields are filled in.");
-    }
-
     fetch("/signup", {
       method: "POST",
       body: JSON.stringify(data),
@@ -117,9 +65,7 @@ const SignUpEmployer = ({ usertype }) => {
           setCurrentUser(data.data);
           history.push("/");
         } else {
-          alert(
-            "Something went wrong. Please try again with a different username and/or email."
-          );
+          alert(`${data.error}`);
         }
       });
   };
@@ -347,14 +293,14 @@ const SignUpEmployer = ({ usertype }) => {
         />
 
         <div>
-          <button type="reset">Clear</button>
-          {readyToSubmit ? (
-            <button type="submit">Submit</button>
-          ) : (
-            <button type="submit" disabled>
+          <div>
+            <button type="reset">Clear</button>
+          </div>
+          <div>
+            <button type="submit" onClick={handleSubmitEmployer}>
               Submit
             </button>
-          )}
+          </div>
         </div>
       </form>
     </div>

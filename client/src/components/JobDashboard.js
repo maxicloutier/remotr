@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import ChangingProgressProvider from "../progress-bar/ChangingProgressProvider";
@@ -48,14 +48,17 @@ const JobDashboard = () => {
     <div>
       {jobApplicants.map((jobApplicant) => {
         return (
-          <div>
-            {jobApplicant.name}
-            {jobApplicant.profile}
-            {jobApplicant.email}
-            {jobApplicant.phone}
-            {jobApplicant.candidateLocation}
-            {jobApplicant.candidatePicture}
-          </div>
+          <Link to={`/application/${jobApplicant._id}`} key={jobApplicant._id}>
+            <img src={jobApplicant.candidatePicture} alt="Candidate Picture" />
+            <div>
+              {jobApplicant.name}
+              {jobApplicant.candidateLocation}
+            </div>
+            <div>
+              {jobApplicant.email}
+              {jobApplicant.phone}
+            </div>
+          </Link>
         );
       })}
     </div>

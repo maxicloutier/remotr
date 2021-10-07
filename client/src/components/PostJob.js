@@ -10,18 +10,6 @@ import { useHistory } from "react-router-dom";
 const PostJob = () => {
   const { currentUser } = useContext(Context);
 
-  // const initialState = {
-  //   company_name: currentUser.name,
-  //   company_logo_url: currentUser.logo,
-  //   title: "",
-  //   category: "",
-  //   candidate_required_location: "",
-  //   description: "",
-  //   salary: "",
-  //   job_type: "",
-  //   employerId: currentUser._id,
-  // };
-
   const [formData, setFormData] = useState(null);
 
   useEffect(() => {
@@ -45,8 +33,6 @@ const PostJob = () => {
 
   const { employerId } = formData || {};
 
-  let readyToSubmit = false;
-
   const history = useHistory();
 
   const handleSubmitJob = (ev) => {
@@ -65,27 +51,6 @@ const PostJob = () => {
       employerId: currentUser._id,
     };
 
-    if (formData.description.length < 700) {
-      alert(
-        "Please make sure that your job description is at least 700 characters long. Include context, about the job, responsibilities, qualifications, etc."
-      );
-    }
-
-    if (
-      formData.company_name !== "" &&
-      formData.company_logo_url !== "" &&
-      formData.title !== "" &&
-      formData.category !== "" &&
-      formData.candidate_required_location !== "" &&
-      formData.description !== "" &&
-      formData.job_type !== "" &&
-      formData.employerId !== ""
-    ) {
-      readyToSubmit = true;
-    } else {
-      alert("Please make sure that all required fields are filled in.");
-    }
-
     fetch("/job", {
       method: "POST",
       body: JSON.stringify(data),
@@ -97,7 +62,7 @@ const PostJob = () => {
           alert("Job successfully posted!");
           history.push(`/me/${employerId}`);
         } else {
-          alert("Something went wrong.");
+          alert(`${data.error}`);
         }
       });
   };
@@ -224,14 +189,14 @@ const PostJob = () => {
         </select>
 
         <div>
-          <button type="reset">Clear</button>
-          {readyToSubmit ? (
-            <button type="submit">Submit</button>
-          ) : (
-            <button type="submit" disabled>
+          <div>
+            <button type="reset">Clear</button>
+          </div>
+          <div>
+            <button type="submit" onClick={handleSubmitJob}>
               Submit
             </button>
-          )}
+          </div>
         </div>
       </form>
     </div>

@@ -55,7 +55,9 @@ const PublicEmployerProfile = () => {
         <h2>{employer.name}</h2>
         <p>{employer.slogan}</p>
         <p>{employer.industry}</p>
-        <a href={employer.website}>Website</a>
+        <a href={employer.website} target="_blank">
+          Website
+        </a>
         <p>Location: {employer.location}</p>
       </div>
 

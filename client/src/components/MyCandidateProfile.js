@@ -29,7 +29,7 @@ const MyCandidateProfile = () => {
     history.push("/");
   };
 
-  if (!currentUser ) {
+  if (!currentUser) {
     return (
       <Loading>
         <ProgressBarContainer>
@@ -109,11 +109,11 @@ const MyCandidateProfile = () => {
       <div>
         <h3>Social</h3>
 
-        <a href={currentUser.linkedin}>
+        <a href={currentUser.linkedin} target="_blank">
           <img src="/assets/social/linkedin-logo.png" alt="LinkedIn logo" />
         </a>
 
-        <a href={currentUser.instagram}>
+        <a href={currentUser.instagram} target="_blank">
           <img src="/assets/social/instagram-logo.jpeg" alt="Instagram logo" />
         </a>
       </div>

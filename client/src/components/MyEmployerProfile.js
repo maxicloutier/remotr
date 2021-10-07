@@ -61,7 +61,9 @@ const MyEmployerProfile = () => {
         <h2>{currentUser.name}</h2>
         <p>{currentUser.slogan}</p>
         <p>{currentUser.industry}</p>
-        <a href={currentUser.website}>Website</a>
+        <a href={currentUser.website} target="_blank">
+          Website
+        </a>
         <p>Location: {currentUser.location}</p>
       </div>
 
@@ -98,7 +100,7 @@ const MyEmployerProfile = () => {
           {jobs ? (
             jobs.map((job) => {
               return (
-                <Link to={`/jobdashboard/:${job._id}`} key={job._id}>
+                <Link to={`/jobdashboard/${job._id}`} key={job._id}>
                   <p>{job.title}</p>
                   <p>{job.candidate_required_location}</p>
                   <p>{job.publication_date}</p>

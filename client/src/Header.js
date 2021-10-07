@@ -1,10 +1,17 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Context } from "./Context";
 
 const Header = () => {
-  const { currentUser } = useContext(Context);
+  const { currentUser, setCurrentUser } = useContext(Context);
+
+  const history = useHistory();
+
+  const handleSignOut = () => {
+    setCurrentUser(null);
+    history.push("/");
+  };
 
   return (
     <Wrapper>
@@ -48,6 +55,8 @@ const Header = () => {
                   <Me>ME</Me>
                 </StyledLink>
               </MeLinkDiv>
+
+              <button onClick={handleSignOut}>Sign Out</button>
             </>
           )}
         </NavBar>

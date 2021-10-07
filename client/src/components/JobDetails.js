@@ -14,8 +14,6 @@ const JobDetails = () => {
 
   const { _id } = useParams();
 
-  // let percentage;
-
   useEffect(() => {
     fetch(`/job/${_id}`)
       .then((res) => res.json())
@@ -47,10 +45,6 @@ const JobDetails = () => {
       profile: `/candidate/${currentUser._id}`,
     };
 
-    if (!currentUser) {
-      alert("You must have a user account and be online to apply for a job.");
-    }
-
     fetch(`/job/${jobDescription._id}/externalApplication`, {
       method: "POST",
       body: JSON.stringify(data),
@@ -61,9 +55,7 @@ const JobDetails = () => {
         if (data.status === 201) {
           alert("Application successfully saved on your profile!");
         } else {
-          alert(
-            "Something went wrong. Please make sure that all fields are filled in."
-          );
+          alert(`${data.error}`);
         }
       });
   };
@@ -118,26 +110,34 @@ const JobDetails = () => {
 
         <div>
           {jobDescription.exclusivity ? (
-            <button>
-              <Apply
-                jobId={jobDescription._id}
-                company_name={jobDescription.company_name}
-                employerId={jobDescription.employerId}
-                company_logo_url={jobDescription.company_logo_url}
-                title={jobDescription.title}
-                candidate_required_location={
-                  jobDescription.candidate_required_location
-                }
-              />
-            </button>
+            <div>
+              <button>
+                <Apply
+                  jobId={jobDescription._id}
+                  company_name={jobDescription.company_name}
+                  employerId={jobDescription.employerId}
+                  company_logo_url={jobDescription.company_logo_url}
+                  title={jobDescription.title}
+                  candidate_required_location={
+                    jobDescription.candidate_required_location
+                  }
+                />
+              </button>
+            </div>
           ) : (
             <div>
-              <button onClick={handleSaveApplication}>
-                Save to the List of Jobs I’ve Applied for on My Profile
-              </button>
-              <button>
-                <a href={jobDescription.url}>Apply Externally</a>
-              </button>
+              <div>
+                <button onClick={handleSaveApplication}>
+                  Save to the List of Jobs I’ve Applied for on My Profile
+                </button>
+              </div>
+              <div>
+                <button>
+                  <a href={jobDescription.url} target="_blank">
+                    Apply Externally
+                  </a>
+                </button>
+              </div>
             </div>
           )}
         </div>

@@ -100,11 +100,11 @@ const PublicCandidateProfile = () => {
       <div>
         <h3>Social</h3>
 
-        <a href={candidate.linkedin}>
+        <a href={candidate.linkedin} target="_blank">
           <img src="/assets/social/linkedin-logo.png" alt="LinkedIn logo" />
         </a>
 
-        <a href={candidate.instagram}>
+        <a href={candidate.instagram} target="_blank">
           <img src="/assets/social/instagram-logo.jpeg" alt="Instagram logo" />
         </a>
       </div>

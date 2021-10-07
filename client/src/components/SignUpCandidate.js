@@ -36,8 +36,6 @@ const SignUpCandidate = ({ usertype }) => {
 
   const { setCurrentUser } = useContext(Context);
 
-  let readyToSubmit = false;
-
   const history = useHistory();
 
   const handleSubmitCandidate = (ev) => {
@@ -71,60 +69,6 @@ const SignUpCandidate = ({ usertype }) => {
       confirm_password: candidateFormData.confirm_password,
     };
 
-    if (candidateFormData._id.length < 4) {
-      alert("Your username must be at least 4 characters long.");
-    }
-
-    if (
-      !candidateFormData.email.includes("@") ||
-      !candidateFormData.email.includes(".")
-    ) {
-      alert("Please enter a valid email address.");
-    }
-
-    const strongPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-
-    if (
-      !candidateFormData.password.match(strongPassword) ||
-      !candidateFormData.confirm_password.match(strongPassword)
-    ) {
-      alert(
-        "Please make sure your password contains at least 8 characters including letters and numbers."
-      );
-    }
-
-    if (candidateFormData.password !== candidateFormData.confirm_password) {
-      alert("Please make sure your password match.");
-    }
-
-    if (
-      candidateFormData._id !== "" &&
-      candidateFormData.email !== "" &&
-      candidateFormData.password !== "" &&
-      candidateFormData.name !== "" &&
-      candidateFormData.about !== "" &&
-      candidateFormData.degree !== "" &&
-      candidateFormData.degree_duration !== "" &&
-      candidateFormData.employer !== "" &&
-      candidateFormData.hobbies !== "" &&
-      candidateFormData.languages !== "" &&
-      candidateFormData.location !== "" &&
-      candidateFormData.phone !== "" &&
-      candidateFormData.position !== "" &&
-      candidateFormData.school !== "" &&
-      candidateFormData.skills !== "" &&
-      candidateFormData.timezone !== "" &&
-      candidateFormData.title !== "" &&
-      candidateFormData.looking !== "" &&
-      candidateFormData.picture !== "" &&
-      usertype !== "" &&
-      candidateFormData.confirm_password !== ""
-    ) {
-      readyToSubmit = true;
-    } else {
-      alert("Please make sure that all required fields are filled in.");
-    }
-
     fetch("/signup", {
       method: "POST",
       body: JSON.stringify(data),
@@ -136,9 +80,7 @@ const SignUpCandidate = ({ usertype }) => {
           setCurrentUser(data.data);
           history.push("/");
         } else {
-          alert(
-            "Something went wrong. Please try again with a different username and/or email."
-          );
+          alert(`${data.error}`);
         }
       });
   };
@@ -481,14 +423,14 @@ const SignUpCandidate = ({ usertype }) => {
         />
 
         <div>
-          <button type="reset">Clear</button>
-          {readyToSubmit ? (
-            <button type="submit">Submit</button>
-          ) : (
-            <button type="submit" disabled>
+          <div>
+            <button type="reset">Clear</button>
+          </div>
+          <div>
+            <button type="submit" onClick={handleSubmitCandidate}>
               Submit
             </button>
-          )}
+          </div>
         </div>
       </form>
     </div>

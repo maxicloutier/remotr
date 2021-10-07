@@ -37,20 +37,10 @@ const SignIn = () => {
           setCurrentUser(data.data);
           history.push("/");
         } else {
-          alert("User not found or wrong combination of email and password.");
+          alert(`${data.error}`);
         }
       });
   };
-
-  let readyToSubmit = false;
-
-  if (
-    formData.usertype !== "" &&
-    formData.email !== "" &&
-    formData.password !== ""
-  ) {
-    readyToSubmit = true;
-  }
 
   return (
     <div>
@@ -95,13 +85,9 @@ const SignIn = () => {
         />
 
         <div>
-          {readyToSubmit ? (
-            <button type="submit">Confirm</button>
-          ) : (
-            <button type="submit" disabled>
-              Confirm
-            </button>
-          )}
+          <button type="submit" onClick={handleSubmit}>
+            Confirm
+          </button>
         </div>
       </form>
     </div>
