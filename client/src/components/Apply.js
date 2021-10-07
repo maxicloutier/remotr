@@ -187,9 +187,7 @@ const Apply = ({
           <button type="reset">Clear</button>
         </div>
         <div>
-          <button type="submit" onClick={handleApply}>
-            Submit
-          </button>
+          <button type="submit">Submit</button>
         </div>
       </form>
     </div>

@@ -37,7 +37,7 @@ const PostJob = () => {
 
   const handleSubmitJob = (ev) => {
     ev.preventDefault();
-    ev.stopPropagation(); 
+    ev.stopPropagation();
 
     const data = {
       company_name: currentUser.name,
@@ -193,9 +193,7 @@ const PostJob = () => {
             <button type="reset">Clear</button>
           </div>
           <div>
-            <button type="submit" onClick={handleSubmitJob}>
-              Submit
-            </button>
+            <button type="submit">Submit</button>
           </div>
         </div>
       </form>

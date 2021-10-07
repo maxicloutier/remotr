@@ -85,9 +85,7 @@ const SignIn = () => {
         />
 
         <div>
-          <button type="submit" onClick={handleSubmit}>
-            Confirm
-          </button>
+          <button type="submit">Confirm</button>
         </div>
       </form>
     </div>

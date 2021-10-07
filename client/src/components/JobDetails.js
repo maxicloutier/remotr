@@ -142,18 +142,16 @@ const JobDetails = () => {
             <div>
               {jobDescription.exclusivity ? (
                 <div>
-                  <button>
-                    <Apply
-                      jobId={jobDescription._id}
-                      company_name={jobDescription.company_name}
-                      employerId={jobDescription.employerId}
-                      company_logo_url={jobDescription.company_logo_url}
-                      title={jobDescription.title}
-                      candidate_required_location={
-                        jobDescription.candidate_required_location
-                      }
-                    />
-                  </button>
+                  <Apply
+                    jobId={jobDescription._id}
+                    company_name={jobDescription.company_name}
+                    employerId={jobDescription.employerId}
+                    company_logo_url={jobDescription.company_logo_url}
+                    title={jobDescription.title}
+                    candidate_required_location={
+                      jobDescription.candidate_required_location
+                    }
+                  />
                 </div>
               ) : (
                 <ButtonContainer>
@@ -330,7 +328,6 @@ const ExternalLink = styled.a`
   overflow: hidden;
   z-index: 1;
   cursor: pointer;
-
 
   &:after {
     content: "";

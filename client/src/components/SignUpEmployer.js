@@ -32,7 +32,7 @@ const SignUpEmployer = ({ usertype }) => {
 
   const handleSubmitEmployer = (ev) => {
     ev.preventDefault();
-    ev.stopPropagation(); 
+    ev.stopPropagation();
 
     const data = {
       _id: employerFormData._id,
@@ -297,9 +297,7 @@ const SignUpEmployer = ({ usertype }) => {
             <button type="reset">Clear</button>
           </div>
           <div>
-            <button type="submit" onClick={handleSubmitEmployer}>
-              Submit
-            </button>
+            <button type="submit">Submit</button>
           </div>
         </div>
       </form>

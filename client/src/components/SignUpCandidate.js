@@ -427,9 +427,7 @@ const SignUpCandidate = ({ usertype }) => {
             <button type="reset">Clear</button>
           </div>
           <div>
-            <button type="submit" onClick={handleSubmitCandidate}>
-              Submit
-            </button>
+            <button type="submit">Submit</button>
           </div>
         </div>
       </Form>
