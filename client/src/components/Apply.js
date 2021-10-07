@@ -2,9 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Context } from "../Context";
 import { useHistory } from "react-router-dom";
-import { CircularProgressbarWithChildren } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
-import ChangingProgressProvider from "../progress-bar/ChangingProgressProvider";
 
 const Apply = ({
   jobId,
@@ -54,8 +51,6 @@ const Apply = ({
     profile,
   } = formData || {};
 
-  let readyToSubmit = false;
-
   const history = useHistory();
 
   const handleApply = () => {
@@ -93,29 +88,6 @@ const Apply = ({
         }
       });
   };
-
-  if (!currentUser) {
-    return (
-      <Loading>
-        <ProgressBarContainer>
-          <ChangingProgressProvider values={[0, 20, 40, 60, 80, 100]}>
-            {(percentage) => (
-              <CircularProgressbarWithChildren value={percentage}>
-                <img
-                  style={{ width: 80, marginTop: -5 }}
-                  src="/assets/other/doge.png"
-                  alt="doge"
-                />
-                <div style={{ fontSize: 20 }}>
-                  <strong>{percentage}</strong> mate
-                </div>
-              </CircularProgressbarWithChildren>
-            )}
-          </ChangingProgressProvider>
-        </ProgressBarContainer>
-      </Loading>
-    );
-  }
 
   return (
     <div>
@@ -223,20 +195,5 @@ const Apply = ({
     </div>
   );
 };
-
-const ProgressBarContainer = styled.div`
-  max-width: 200px;
-  margin-top: 30px;
-`;
-
-const Loading = styled.div`
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  width: 100vw;
-  text-align: -webkit-center;
-`;
 
 export default Apply;

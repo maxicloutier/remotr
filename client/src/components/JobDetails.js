@@ -84,65 +84,107 @@ const JobDetails = () => {
   }
 
   return (
-    <div>
-      <div>
-        {jobDescription.company_logo_url ? (
-          <img src={jobDescription.company_logo_url} alt="Company Logo" />
-        ) : (
-          <img src="/assets/employers/alt-logo.jpeg" alt="Logo" />
-        )}
-        <p>{jobDescription.company_name}</p>
-        <p>{jobDescription.title}</p>
-        <p>{jobDescription.candidate_required_location}</p>
+    <Wrapper>
+      <SecondWrapper>
+        <DescriptionHeader>
+          <LogoContainer>
+            {jobDescription.company_logo_url ? (
+              <CompanyLogo
+                src={jobDescription.company_logo_url}
+                alt="Company Logo"
+              />
+            ) : (
+              <CompanyLogo src="/assets/employers/alt-logo.jpeg" alt="Logo" />
+            )}
+          </LogoContainer>
+          <JobSummary>
+            <Company>{jobDescription.company_name}</Company>
+            <JobColumns>
+              <Position>
+                <ContentTitles>Position</ContentTitles>
+                <JobInfo>{jobDescription.title}</JobInfo>
 
-        <p>{jobDescription.category}</p>
-        <p>{jobDescription.salary}</p>
-        <p>{jobDescription.job_type}</p>
-        <p>{jobDescription.publication_date}</p>
+                <ContentTitles>Category</ContentTitles>
+                <JobInfo>{jobDescription.category}</JobInfo>
 
-        {jobDescription.exclusivity ? (
-          <p>{jobDescription.exclusivity}</p>
-        ) : (
-          <p>Job from Remotive.io</p>
-        )}
+                <ContentTitles>Candidate Required Location</ContentTitles>
+                <JobInfo>{jobDescription.candidate_required_location}</JobInfo>
+              </Position>
+              <Details>
+                <ContentTitles>Approximate Salary</ContentTitles>
+                <JobInfo>{jobDescription.salary}</JobInfo>
 
-        <div>{jobDescription.description}</div>
+                <ContentTitles>Job Type</ContentTitles>
+                <JobInfo>{jobDescription.job_type}</JobInfo>
 
-        <div>
-          {jobDescription.exclusivity ? (
+                <ContentTitles>Publication Date</ContentTitles>
+                <JobInfo>{jobDescription.publication_date}</JobInfo>
+
+                {jobDescription.exclusivity ? (
+                  <JobInfo>{jobDescription.exclusivity}</JobInfo>
+                ) : (
+                  <JobInfo style={{ marginTop: "30px", marginBottom: 0 }}>
+                    Job from Remotive.io
+                  </JobInfo>
+                )}
+              </Details>
+            </JobColumns>
+          </JobSummary>
+        </DescriptionHeader>
+
+        <SubTitles>Job Description</SubTitles>
+        <JobDescription
+          dangerouslySetInnerHTML={{
+            __html: jobDescription.description,
+          }}
+        ></JobDescription>
+
+        <SubTitles>Apply</SubTitles>
+        <ApplyContainer>
+          {currentUser ? (
             <div>
-              <button>
-                <Apply
-                  jobId={jobDescription._id}
-                  company_name={jobDescription.company_name}
-                  employerId={jobDescription.employerId}
-                  company_logo_url={jobDescription.company_logo_url}
-                  title={jobDescription.title}
-                  candidate_required_location={
-                    jobDescription.candidate_required_location
-                  }
-                />
-              </button>
+              {jobDescription.exclusivity ? (
+                <div>
+                  <button>
+                    <Apply
+                      jobId={jobDescription._id}
+                      company_name={jobDescription.company_name}
+                      employerId={jobDescription.employerId}
+                      company_logo_url={jobDescription.company_logo_url}
+                      title={jobDescription.title}
+                      candidate_required_location={
+                        jobDescription.candidate_required_location
+                      }
+                    />
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <div>
+                    <button onClick={handleSaveApplication}>
+                      Save to the List of Jobs I’ve Applied for on My Profile
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
             <div>
               <div>
-                <button onClick={handleSaveApplication}>
-                  Save to the List of Jobs I’ve Applied for on My Profile
-                </button>
+                <ExternalLink href={jobDescription.url} target="_blank">
+                  Apply Externally
+                </ExternalLink>
               </div>
-              <div>
-                <button>
-                  <a href={jobDescription.url} target="_blank">
-                    Apply Externally
-                  </a>
-                </button>
-              </div>
+              <Warning>
+                You must be a candidate member and be signed in to apply for a
+                job on Remotr or to save a Remotive job to your profile. Sign in
+                (or up!) now! ⬆️
+              </Warning>
             </div>
           )}
-        </div>
-      </div>
-    </div>
+        </ApplyContainer>
+      </SecondWrapper>
+    </Wrapper>
   );
 };
 
@@ -158,6 +200,162 @@ const Loading = styled.div`
   transform: translateY(-50%);
   width: 100vw;
   text-align: -webkit-center;
+`;
+
+const Wrapper = styled.div`
+  width: 100vw;
+  margin: 0;
+  height: auto;
+  position: relative;
+`;
+
+const SecondWrapper = styled.div`
+  width: 80%;
+  margin: 0;
+  text-align: left;
+  height: auto;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+`;
+
+const DescriptionHeader = styled.div`
+  display: flex;
+  border: solid gainsboro 1px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
+  border-radius: 10px;
+  width: 100%;
+`;
+
+const LogoContainer = styled.div`
+  align-self: center;
+  margin: 20px;
+`;
+
+const CompanyLogo = styled.img`
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+`;
+
+const Company = styled.h1`
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 35px;
+  width: 100%;
+  margin-left: 30px;
+`;
+
+const JobSummary = styled.div`
+  align-self: center;
+`;
+
+const JobColumns = styled.div`
+  display: flex;
+`;
+
+const Position = styled.div`
+  margin: 20px 30px;
+`;
+
+const Details = styled.div`
+  margin: 20px 30px;
+`;
+
+const ContentTitles = styled.p`
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: #004ddb;
+  line-height: 1.3;
+`;
+
+const JobInfo = styled.p`
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1;
+  margin-bottom: 15px;
+`;
+
+const SubTitles = styled.p`
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: #004ddb;
+  line-height: 1.3;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  margin-left: 20px;
+`;
+
+const JobDescription = styled.div`
+  border: solid gainsboro 1px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
+  border-radius: 10px;
+  width: 100%;
+  padding: 20px;
+`;
+
+const ApplyContainer = styled.div`
+  border: solid gainsboro 1px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
+  border-radius: 10px;
+  width: 100%;
+  padding: 20px;
+`;
+
+const Warning = styled.p`
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1;
+  margin-bottom: 15px;
+  margin-top: 15px;
+`;
+
+const ExternalLink = styled.a`
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: white;
+  display: inline-block;
+  border-radius: 10px;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00ced1;
+    z-index: -2;
+  }
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #004ddb;
+
+    transition: all 0.3s;
+    z-index: -1;
+  }
+  &:hover {
+    color: #fff;
+    &:before {
+      width: 100%;
+    }
+  }
 `;
 
 export default JobDetails;

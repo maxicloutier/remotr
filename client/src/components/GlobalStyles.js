@@ -12,7 +12,9 @@ export default createGlobalStyle`
   input, button, select, option,
   h1, h2, h3, h4, h5, h6, p,
   text {
-      font-family: sans-serif;
+      /* font-family: "Raleway", sans-serif; */
+      font-family: "Poppins", sans-serif;
+
   }
 
   html, body {
@@ -71,7 +73,7 @@ export default createGlobalStyle`
   }
 
   h1, h2, h3, h4 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
   }
 
   h1 {
@@ -96,8 +98,7 @@ export default createGlobalStyle`
   a,
   blockquote,
   span {
-    font-family: 'Roboto Slab', serif;
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 300;
     line-height: 1.5em;
   }
@@ -105,7 +106,6 @@ export default createGlobalStyle`
   code,
   codeblock {
     background: #eaeaea;
-    font-family: 'Roboto Mono', monospace;
     font-size: 14px;
     padding: 0 4px;
   }

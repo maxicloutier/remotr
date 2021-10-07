@@ -1,0 +1,40 @@
+:root {
+  --smoky: #100c08;
+  --ghost: #f8f8ff;
+  --sapphire: #0c6291;
+  --royal: #004ddb;
+  --prussian: #003554;
+  --bluegreen: #1f7a8c;
+  --red: #b23a48;
+  --font-family: "Poppins", "sans-serif";
+}
+
+html,
+body {
+  --smoky: #100c08;
+  --ghost: #f8f8ff;
+  --sapphire: #0c6291;
+  --royal: #004ddb;
+  --prussian: #003554;
+  --bluegreen: #1f7a8c;
+  --red: #b23a48;
+  --font-family: "Poppins", "sans-serif";
+}
+
+html,
+body,
+div,
+input,
+button,
+select,
+option,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+text {
+  --font-family: "Poppins", "sans-serif";
+}

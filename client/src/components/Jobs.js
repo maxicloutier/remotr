@@ -69,17 +69,17 @@ const Jobs = () => {
                 )}
               </LogoContainer>
               <TitleContainer>
-                <p>{job.company_name}</p>
-                <p>{job.title}</p>
-                <p>{job.candidate_required_location}</p>
+                <Company>{job.company_name.toUpperCase()}</Company>
+                <JobTitle>{job.title}</JobTitle>
+                <JobLocation>📍{job.candidate_required_location}</JobLocation>
               </TitleContainer>
               <DetailContainer>
-                <p>{job.category}</p>
-                <p>{job.salary}</p>
+                <JobCategory>{job.category}</JobCategory>
+                {job.salary && <JobSalary>{job.salary}</JobSalary>}
                 {job.exclusivity ? (
-                  <p>{job.exclusivity}</p>
+                  <Via>{job.exclusivity}</Via>
                 ) : (
-                  <p>Job from Remotive.io</p>
+                  <Via>Job from Remotive.io</Via>
                 )}
               </DetailContainer>
             </StyledJob>
@@ -99,6 +99,7 @@ const PageTitle = styled.h1`
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
+  color: #004ddb;
 `;
 
 const SearchContainer = styled.div`
@@ -109,13 +110,14 @@ const SearchContainer = styled.div`
 
 const InputField = styled.input`
   border: #989898 1px solid;
-  width: 350px;
-  height: 40px;
+  width: 30%;
+  height: 50px;
   border-radius: 5px;
   margin-right: 10px;
   font-size: 16px;
   padding-left: 8px;
   padding-right: 8px;
+  font-family: "Poppins";
 `;
 
 const JobsContainer = styled.div`
@@ -126,37 +128,98 @@ const JobsContainer = styled.div`
 `;
 
 const StyledJob = styled(Link)`
-  width: 80%;
+  width: 90%;
   min-height: 100px;
-  margin: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   padding: 10px;
-  border: black solid 1px;
   border-radius: 10px;
   display: flex;
   text-decoration: none;
+  color: #100c08;
   justify-self: center;
+  position: relative;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+`;
+
+const LogoContainer = styled.div`
+  width: 100px;
+  align-self: center;
+  margin-right: 5px;
 `;
 
 const Logo = styled.img`
   max-width: 80px;
   max-height: 80px;
   object-fit: contain;
-`;
-
-const LogoContainer = styled.div`
-  width: 20%;
+  margin: 5px;
 `;
 
 const TitleContainer = styled.div`
-  width: 50%;
+  width: 60%;
+  align-self: center;
+  margin: 10px 5px;
+`;
+
+const Company = styled.p`
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: #004ddb;
+  line-height: 1;
+`;
+
+const JobTitle = styled.p`
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1;
+`;
+
+const JobLocation = styled.p`
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1;
 `;
 
 const DetailContainer = styled.div`
-  width: 30%;
+  min-width: 40%;
+  margin: 10px 5px;
+  align-self: center;
+`;
+
+const JobCategory = styled.p`
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #00ced1;
+  margin-bottom: 15px;
+  line-height: 1;
+`;
+
+const JobSalary = styled.p`
+  font-family: "Roboto", sans-serif;
+
+  line-height: 1;
+  font-weight: 500;
+  font-size: 18px;
+`;
+
+const Via = styled.p`
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  margin-top: 15px;
+  line-height: 1;
+  font-size: 16px;
 `;
 
 const ProgressBarContainer = styled.div`
   max-width: 200px;
+  margin: 5px;
 `;
 
 const Loading = styled.div`

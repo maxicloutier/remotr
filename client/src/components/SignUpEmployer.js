@@ -32,7 +32,7 @@ const SignUpEmployer = ({ usertype }) => {
 
   const handleSubmitEmployer = (ev) => {
     ev.preventDefault();
-    ev.stopPropagation(); // Do I need this one?
+    ev.stopPropagation(); 
 
     const data = {
       _id: employerFormData._id,

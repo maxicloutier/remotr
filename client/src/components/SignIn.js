@@ -18,7 +18,7 @@ const SignIn = () => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    ev.stopPropagation(); // Do I need this one?
+    ev.stopPropagation();
 
     const data = {
       usertype: formData.usertype,

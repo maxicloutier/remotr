@@ -15,8 +15,37 @@ const Home = () => {
       />
 
       <Content>
-        <h1>Home</h1>
-        <p>Home</p>
+        <div style={{ width: "60%" }}>
+          <HomeTitle>Welcome to Remotr</HomeTitle>
+          <Paragraph>
+            <SubParagraphs>
+              Remote work is a working style that allows professionals to work
+              outside of a traditional office environment. It is based on the
+              concept that work does not need to be done in a specific place to
+              be executed successfully.
+            </SubParagraphs>
+            <SubParagraphs>
+              Instead of commuting to an office each day to work from a
+              designated desk or cubicle, remote employees can execute their
+              projects wherever they please, whether at the cottage, on a beach
+              in Mexico, in a café in Paris, etc..
+            </SubParagraphs>
+            <SubParagraphs>
+              In a world where mandatory physical office attendance is no longer
+              justifiable, Remotr aims to change the game for candidates and
+              employers by promoting remote jobs around the world.
+            </SubParagraphs>
+          </Paragraph>
+        </div>
+        <SloganContainer>
+          <Slogan>
+            "The Future <br />
+            of Work Is <br />
+            Location
+            <br />
+            Independent"
+          </Slogan>
+        </SloganContainer>
       </Content>
     </Wrapper>
   );
@@ -35,7 +64,6 @@ const Video = styled.video`
   object-fit: fill;
   top: 0;
   left: 0;
-  /* display: block; */
   width: 100%;
   height: 100%;
   position: fixed;
@@ -44,7 +72,6 @@ const Video = styled.video`
   width: 100%;
   height: auto;
   z-index: -1;
-  /* object-fit: cover; */
 `;
 
 const Content = styled.div`
@@ -53,9 +80,43 @@ const Content = styled.div`
   background: rgba(0, 0, 0, 0.5);
   color: #f1f1f1;
   width: 100%;
-  height: 40%;
+  height: 45%;
   padding: 20px;
   z-index: 4;
+  display: flex;
 `;
 
+const HomeTitle = styled.p`
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+  color: #7de6e7;
+  line-height: 1.3;
+`;
+const Slogan = styled.p`
+  font-size: 40px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-align: center;
+  color: #7de6e7;
+  font-weight: 600;
+  width: 100%;
+`;
+
+const SloganContainer = styled.div`
+  width: 40%;
+  text-align: center;
+  position: relative;
+`;
+
+const Paragraph = styled.p``;
+
+const SubParagraphs = styled.p`
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 20px;
+`;
 export default Home;

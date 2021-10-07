@@ -40,7 +40,7 @@ const SignUpCandidate = ({ usertype }) => {
 
   const handleSubmitCandidate = (ev) => {
     ev.preventDefault();
-    ev.stopPropagation(); // Do I need this one?
+    ev.stopPropagation(); 
 
     const data = {
       _id: candidateFormData._id,
@@ -86,7 +86,7 @@ const SignUpCandidate = ({ usertype }) => {
   };
 
   return (
-    <div>
+    <Wrapper>
       <form onSubmit={handleSubmitCandidate}>
         <label for="_id">Username</label>
         <input
@@ -433,8 +433,16 @@ const SignUpCandidate = ({ usertype }) => {
           </div>
         </div>
       </form>
-    </div>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+	display: grid;
+	place-content: center;
+	margin: 3em 0;
+	background-color: #061323;
+	font-family: "Balsamiq Sans", sans-serif;
+`
 
 export default SignUpCandidate;

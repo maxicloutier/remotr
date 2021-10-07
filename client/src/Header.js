@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { Context } from "./Context";
+import { GiPalmTree } from "react-icons/gi";
 
 const Header = () => {
   const { currentUser, setCurrentUser } = useContext(Context);
@@ -17,7 +18,10 @@ const Header = () => {
     <Wrapper>
       <SiteNameDiv>
         <SiteNameLink to="/" exact="true">
-          <SiteName>remotr</SiteName>
+          <SiteName>
+            <GiPalmTree />
+            remotr
+          </SiteName>
         </SiteNameLink>
       </SiteNameDiv>
       <NavDiv>
@@ -56,7 +60,7 @@ const Header = () => {
                 </StyledLink>
               </MeLinkDiv>
 
-              <button onClick={handleSignOut}>Sign Out</button>
+              <SignOutButton onClick={handleSignOut}>SIGN OUT</SignOutButton>
             </>
           )}
         </NavBar>
@@ -68,12 +72,11 @@ const Header = () => {
 const Wrapper = styled.header`
   width: 100vw;
   display: flex;
-  background-color: black;
-  min-height: 75px;
-  /* position: relative; */
+  background-color: #100c08;
+  min-height: 80px;
   position: sticky;
   top: 0;
-  border-bottom: solid 4px lightseagreen;
+  border-bottom: solid 4px #00ced1;
   z-index: 100;
 `;
 
@@ -93,7 +96,13 @@ const SiteNameLink = styled(Link)`
   padding-left: 35px;
 `;
 
-const SiteName = styled.h1``;
+const SiteName = styled.h1`
+  display: flex;
+  font-family: "Poppins", sans-serif;
+  font-size: 45px;
+  font-weight: 500;
+  align-items: center;
+`;
 
 const NavDiv = styled.div`
   width: 100%;
@@ -114,8 +123,19 @@ const NavBar = styled.nav`
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: white;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 19px;
+  font-family: "Poppins", sans-serif;
+`;
+
+const SignOutButton = styled.button`
+  color: white;
+  font-weight: 600;
+  font-size: 19px;
+  font-family: "Poppins", sans-serif;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 `;
 
 const MeLinkDiv = styled.div`
@@ -143,8 +163,8 @@ const Me = styled.p`
   left: 0%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
+  font-size: 19px;
+  font-weight: 600;
 `;
 
 export default Header;
