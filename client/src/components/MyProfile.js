@@ -8,10 +8,6 @@ import { useHistory } from "react-router";
 const MyProfile = () => {
   const { currentUser } = useContext(Context);
 
-  const history = useHistory();
-
-  console.log(currentUser)
-
   return (
     <div>
       {currentUser.usertype === "candidate" && <MyCandidateProfile />}

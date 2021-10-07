@@ -16,7 +16,6 @@ const ViewApplication = () => {
       .then((res) => res.json())
       .then((data) => {
         setApplication(data.data);
-        console.log(data);
       })
       .catch((error) => {
         console.error(error, "Something went wrong");
@@ -48,7 +47,7 @@ const ViewApplication = () => {
 
   return (
     <div>
-      <img src={application.company_logo_url} alt="Company Logo" />
+      <CompanyLogo src={application.company_logo_url} alt="Company Logo" />
 
       <p>{application.company_name}</p>
       <p>{application.employerId}</p>
@@ -87,6 +86,13 @@ const Loading = styled.div`
   transform: translateY(-50%);
   width: 100vw;
   text-align: -webkit-center;
+`;
+
+const CompanyLogo = styled.img`
+  max-width: 80px;
+  max-height: 80px;
+  object-fit: contain;
+  margin: 5px;
 `;
 
 export default ViewApplication;

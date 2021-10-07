@@ -17,7 +17,6 @@ const MyCandidateProfile = () => {
       .then((res) => res.json())
       .then((data) => {
         setJobApplications(data.data);
-        console.log(data);
       })
       .catch((error) => {
         console.error(error, "Something went wrong");
@@ -150,18 +149,18 @@ const MyCandidateProfile = () => {
             {jobApplications ? (
               jobApplications.map((application) => {
                 return (
-                  <Link
+                  <ApplicationLinks
                     to={`/application/${application._id}`}
                     key={application._id}
                   >
-                    <img
+                    <CompanyLogo
                       src={application.company_logo_url}
                       alt="Company logo"
                     />
                     <p>{application.company_name}</p>
                     <p>{application.title}</p>
                     <p>{application.date}</p>
-                  </Link>
+                  </ApplicationLinks>
                 );
               })
             ) : (
@@ -223,6 +222,7 @@ const CandidateName = styled.p`
   span {
     color: black;
     font-size: 14px;
+    line-height: 1;
   }
 `;
 
@@ -248,10 +248,7 @@ const TextBody = styled.p`
 `;
 
 const CandidateDetails = styled.div`
-  border: solid gainsboro 1px;
-  box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
-  padding: 20px;
-  padding: 20px;
+  padding: 20px 20px 20px 30px;
   height: auto;
   margin-top: 20px;
 `;
@@ -297,9 +294,10 @@ const SideBar = styled.div`
     background: darken(#8be5b1, 15%);
   }
 `;
+
 const SignOutButton = styled.button`
   padding: 12px 20px;
-  width: fit-content;
+  width: 175px;
   border-radius: 10px;
   font-weight: 600;
   color: white;
@@ -343,6 +341,22 @@ const SignOutButton = styled.button`
       width: 100%;
     }
   }
+`;
+
+const CompanyLogo = styled.img`
+  max-width: 80px;
+  max-height: 80px;
+  object-fit: contain;
+  margin: 5px;
+`;
+
+const ApplicationLinks = styled(Link)`
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.5;
+  color: black;
 `;
 
 export default MyCandidateProfile;

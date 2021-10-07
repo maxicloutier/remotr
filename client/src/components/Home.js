@@ -15,9 +15,9 @@ const Home = () => {
       />
 
       <Content>
-        <div style={{ width: "60%" }}>
+        <div style={{ width: "65%" }}>
           <HomeTitle>Welcome to Remotr</HomeTitle>
-          <Paragraph>
+          <>
             <SubParagraphs>
               Remote work is a working style that allows professionals to work
               outside of a traditional office environment. It is based on the
@@ -28,14 +28,15 @@ const Home = () => {
               Instead of commuting to an office each day to work from a
               designated desk or cubicle, remote employees can execute their
               projects wherever they please, whether at the cottage, on a beach
-              in Mexico, in a café in Paris, etc..
+              in Mexico, in a café in Paris, etc.
             </SubParagraphs>
             <SubParagraphs>
-              In a world where mandatory physical office attendance is no longer
-              justifiable, Remotr aims to change the game for candidates and
-              employers by promoting remote jobs around the world.
+              In a world where mandatory office attendance is no longer
+              justifiable for many workers, Remotr aims to change the game for
+              candidates and employers by promoting remote jobs around the
+              world.
             </SubParagraphs>
-          </Paragraph>
+          </>
         </div>
         <SloganContainer>
           <Slogan>
@@ -81,7 +82,7 @@ const Content = styled.div`
   color: #f1f1f1;
   width: 100%;
   height: 45%;
-  padding: 20px;
+  padding: 30px 40px;
   z-index: 4;
   display: flex;
 `;
@@ -89,12 +90,19 @@ const Content = styled.div`
 const HomeTitle = styled.p`
   font-family: "Poppins", sans-serif;
   font-weight: 600;
-  font-size: 30px;
+  font-size: 45px;
   color: #7de6e7;
   line-height: 1.3;
 `;
+
+const SloganContainer = styled.div`
+  width: 35%;
+  text-align: center;
+  position: relative;
+`;
+
 const Slogan = styled.p`
-  font-size: 40px;
+  font-size: 45px;
   margin: 0;
   position: absolute;
   top: 50%;
@@ -104,19 +112,14 @@ const Slogan = styled.p`
   color: #7de6e7;
   font-weight: 600;
   width: 100%;
+  font-family: "Permanent Marker", cursive;
+  font-weight: lighter;
 `;
-
-const SloganContainer = styled.div`
-  width: 40%;
-  text-align: center;
-  position: relative;
-`;
-
-const Paragraph = styled.p``;
 
 const SubParagraphs = styled.p`
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 25px;
+  margin-bottom: 25px;
   font-size: 20px;
+  font-weight: 500;
 `;
 export default Home;

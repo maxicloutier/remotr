@@ -92,7 +92,7 @@ const Apply = ({
   return (
     <div>
       <form onSubmit={handleApply}>
-        <img src={company_logo_url} alt="Company Logo" />
+        <CompanyLogo src={company_logo_url} alt="Company Logo" />
         <p>{company_name}</p>
         <p>{title}</p>
         <p>{candidate_required_location}</p>
@@ -195,5 +195,12 @@ const Apply = ({
     </div>
   );
 };
+
+const CompanyLogo = styled.img`
+  max-width: 80px;
+  max-height: 80px;
+  object-fit: contain;
+  margin: 5px;
+`;
 
 export default Apply;

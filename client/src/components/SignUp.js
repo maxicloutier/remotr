@@ -7,8 +7,8 @@ const SignUp = () => {
   const [usertype, setUserType] = useState(null);
 
   return (
-    <>
-      <div>
+    <Wrapper>
+      <SignUpHead>
         <h1>Sign Up</h1>
         <p>Complete this form to sign up for Remotr!</p>
         <p>Select a user type</p>
@@ -30,13 +30,22 @@ const SignUp = () => {
         >
           I am an Employer
         </button>
-      </div>
+      </SignUpHead>
       <div>
         {usertype === "candidate" && <SignUpCandidate usertype={usertype} />}
         {usertype === "employer" && <SignUpEmployer usertype={usertype} />}
       </div>
-    </>
+    </Wrapper>
   );
-};
 
+};
+  const Wrapper = styled.div`
+  text-align:center;
+    width: 100vw;
+  `;
+
+  const SignUpHead = styled.div`
+  
+  `
+  
 export default SignUp;

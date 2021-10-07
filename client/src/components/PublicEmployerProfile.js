@@ -21,8 +21,6 @@ const PublicEmployerProfile = () => {
       });
   }, []);
 
-  console.log(employer);
-
   if (!employer) {
     return (
       <Loading>

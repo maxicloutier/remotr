@@ -490,7 +490,7 @@ const postJob = async (req, res) => {
   }
 };
 
-// Handler for a candidate to send a job application.
+// Handler for a candidate to send a job application directly through the Remotr website.
 const sendApplication = async (req, res) => {
   const {
     company_name,
@@ -579,7 +579,7 @@ const sendApplication = async (req, res) => {
   }
 };
 
-// Handler for a candidate to send a job application.
+// Handler for a candidate to save an external job post from Remotive to their Remotr profile's applications section.
 const saveApplication = async (req, res) => {
   const {
     company_name,
@@ -662,10 +662,6 @@ const getCandidateApplications = async (req, res) => {
       .collection("applications")
       .find({ candidateId: _id })
       .toArray();
-
-    // if ((allApplications = [])) {
-    //   res.status(400).json({ status: 400, error: "Something went wrong" });
-    // }
 
     res
       .status(200)

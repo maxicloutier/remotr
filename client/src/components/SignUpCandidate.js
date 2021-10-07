@@ -40,7 +40,7 @@ const SignUpCandidate = ({ usertype }) => {
 
   const handleSubmitCandidate = (ev) => {
     ev.preventDefault();
-    ev.stopPropagation(); 
+    ev.stopPropagation();
 
     const data = {
       _id: candidateFormData._id,
@@ -87,7 +87,7 @@ const SignUpCandidate = ({ usertype }) => {
 
   return (
     <Wrapper>
-      <form onSubmit={handleSubmitCandidate}>
+      <Form onSubmit={handleSubmitCandidate}>
         <label for="_id">Username</label>
         <input
           type="text"
@@ -432,17 +432,29 @@ const SignUpCandidate = ({ usertype }) => {
             </button>
           </div>
         </div>
-      </form>
+      </Form>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-	display: grid;
-	place-content: center;
-	margin: 3em 0;
-	background-color: #061323;
-	font-family: "Balsamiq Sans", sans-serif;
-`
+  width: 100%;
+`;
+
+const Form = styled.form`
+  font-family: "Roboto", sans-serif;
+  text-align: left;
+  width: 50%;
+  background: #fff;
+  box-shadow: 0 10px 15px rgba(179, 179, 179, 0.7);
+
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 0 auto;
+
+  background-color: blue;
+`;
 
 export default SignUpCandidate;

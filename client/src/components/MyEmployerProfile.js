@@ -17,7 +17,6 @@ const MyEmployerProfile = () => {
       .then((res) => res.json())
       .then((data) => {
         setJobs(data.data);
-        console.log(data);
       })
       .catch((error) => {
         console.error(error, "Something went wrong");

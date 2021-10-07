@@ -37,26 +37,33 @@ const Community = () => {
       <div>
         {candidates.map((candidate) => {
           return (
-            <Link to={`/candidate/${candidate._id}`} key={candidate._id}>
+            <CandidateLink
+              to={`/candidate/${candidate._id}`}
+              key={candidate._id}
+            >
               <CandidatePics src={candidate.picture} alt="Candidate Picture" />
-              <p>{candidate.name}</p>
-              <p>{candidate.location}</p>
-              <p>{candidate._id}</p>
-              <p>{candidate.title}</p>
-            </Link>
+              <CandidateContainer>
+                <p>{candidate.name}</p>
+                <p>{candidate.location}</p>
+                <p>{candidate._id}</p>
+                <p>{candidate.title}</p>
+              </CandidateContainer>
+            </CandidateLink>
           );
         })}
       </div>
       <div>
         {employers.map((employer) => {
           return (
-            <Link to={`/employer/${employer._id}`} key={employer._id}>
+            <EmployerLink to={`/employer/${employer._id}`} key={employer._id}>
               <CompanyLogos src={employer.logo} alt="Company Logo" />
-              <p>{employer.name}</p>
-              <p>{employer.industry}</p>
-              <p>{employer._id}</p>
-              <p>{employer.location}</p>
-            </Link>
+              <EmployerContainer>
+                <p>{employer.name}</p>
+                <p>{employer.industry}</p>
+                <p>{employer._id}</p>
+                <p>{employer.location}</p>
+              </EmployerContainer>
+            </EmployerLink>
           );
         })}
       </div>
@@ -70,6 +77,23 @@ const Wrapper = styled.div`
 
 const ProgressBarContainer = styled.div`
   max-width: 200px;
+`;
+
+const CandidateContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const CandidateLink = styled.div`
+  display: flex;
+`;
+const EmployerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const EmployerLink = styled.div`
+  display: flex;
 `;
 
 const Loading = styled.div`

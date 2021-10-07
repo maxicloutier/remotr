@@ -19,14 +19,11 @@ const JobDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         setJobDescription(data.data);
-        console.log(data);
       })
       .catch((error) => {
         console.error(error, "Something went wrong");
       });
   }, []);
-
-  console.log(jobDescription);
 
   const handleSaveApplication = () => {
     const data = {
@@ -159,13 +156,18 @@ const JobDetails = () => {
                   </button>
                 </div>
               ) : (
-                <div>
-                  <div>
-                    <button onClick={handleSaveApplication}>
+                <ButtonContainer>
+                  <ApplyButtons>
+                    <ExternalLink href={jobDescription.url} target="_blank">
+                      Apply Externally
+                    </ExternalLink>
+                  </ApplyButtons>
+                  <ApplyButtons>
+                    <SaveJobButton onClick={handleSaveApplication}>
                       Save to the List of Jobs I’ve Applied for on My Profile
-                    </button>
-                  </div>
-                </div>
+                    </SaveJobButton>
+                  </ApplyButtons>
+                </ButtonContainer>
               )}
             </div>
           ) : (
@@ -327,6 +329,8 @@ const ExternalLink = styled.a`
   position: relative;
   overflow: hidden;
   z-index: 1;
+  cursor: pointer;
+
 
   &:after {
     content: "";
@@ -356,6 +360,62 @@ const ExternalLink = styled.a`
       width: 100%;
     }
   }
+`;
+
+const SaveJobButton = styled.button`
+  padding: 12px 20px;
+  width: 525px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: white;
+  display: inline-block;
+  border-radius: 10px;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00ced1;
+    z-index: -2;
+  }
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #004ddb;
+
+    transition: all 0.3s;
+    z-index: -1;
+  }
+  &:hover {
+    color: #fff;
+    &:before {
+      width: 100%;
+    }
+  }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+`;
+
+const ApplyButtons = styled.div`
+  margin: 10px;
 `;
 
 export default JobDetails;

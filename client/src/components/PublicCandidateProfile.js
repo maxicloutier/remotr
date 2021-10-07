@@ -15,7 +15,6 @@ const PublicCandidateProfile = () => {
       .then((res) => res.json())
       .then((data) => {
         setCandidate(data.data);
-        console.log(data.data);
       })
       .catch((error) => {
         console.error(error, "Something went wrong");
