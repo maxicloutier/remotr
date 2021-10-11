@@ -71,10 +71,12 @@ const SignUpEmployer = ({ usertype }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmitEmployer}>
-        <label for="_id">Username</label>
-        <input
+    <Wrapper>
+      <Form onSubmit={handleSubmitEmployer}>
+        <FormTitle>Employer Form</FormTitle>
+
+        <Label for="_id">Username</Label>
+        <Input
           type="text"
           placeholder="Username"
           name="_id"
@@ -86,8 +88,8 @@ const SignUpEmployer = ({ usertype }) => {
           }}
         />
 
-        <label for="name">Company Name</label>
-        <input
+        <Label for="name">Company Name</Label>
+        <Input
           type="text"
           placeholder="Company name"
           name="name"
@@ -99,8 +101,8 @@ const SignUpEmployer = ({ usertype }) => {
           }}
         />
 
-        <label for="logo">Link to Your Company Logo</label>
-        <input
+        <Label for="logo">Link to Your Company Logo</Label>
+        <Input
           type="url"
           placeholder="Add link here"
           name="logo"
@@ -112,8 +114,8 @@ const SignUpEmployer = ({ usertype }) => {
           }}
         />
 
-        <label for="website">Company Website</label>
-        <input
+        <Label for="website">Company Website</Label>
+        <Input
           type="url"
           placeholder="Add link here"
           name="website"
@@ -125,8 +127,8 @@ const SignUpEmployer = ({ usertype }) => {
           }}
         />
 
-        <label for="email">Email</label>
-        <input
+        <Label for="email">Email</Label>
+        <Input
           type="email"
           placeholder="Email"
           name="email"
@@ -138,8 +140,8 @@ const SignUpEmployer = ({ usertype }) => {
           }}
         />
 
-        <label for="password">Password</label>
-        <input
+        <Label for="password">Password</Label>
+        <Input
           type="password"
           placeholder="Password"
           name="password"
@@ -151,8 +153,8 @@ const SignUpEmployer = ({ usertype }) => {
           }}
         />
 
-        <label for="confirm_password">Confirm Password</label>
-        <input
+        <Label for="confirm_password">Confirm Password</Label>
+        <Input
           type="password"
           placeholder="Confirm password"
           name="confirm_password"
@@ -164,8 +166,8 @@ const SignUpEmployer = ({ usertype }) => {
           }}
         />
 
-        <label for="slogan">Company Slogan or Profile Headline</label>
-        <input
+        <Label for="slogan">Company Slogan or Profile Headline</Label>
+        <Input
           type="text"
           placeholder="Slogan/headline"
           name="slogan"
@@ -177,8 +179,8 @@ const SignUpEmployer = ({ usertype }) => {
           }}
         />
 
-        <label for="about">About Your Company</label>
-        <textarea
+        <Label for="about">About Your Company</Label>
+        <TextArea
           placeholder="Introduce your company to potential candidates. What is your mission, your vision, your goals, your remote philosophy? Why are you a great employer?"
           name="about"
           onChange={(ev) => {
@@ -187,10 +189,10 @@ const SignUpEmployer = ({ usertype }) => {
               about: ev.target.value,
             });
           }}
-        ></textarea>
+        ></TextArea>
 
-        <label for="industry">Industry</label>
-        <input
+        <Label for="industry">Industry</Label>
+        <Input
           type="text"
           placeholder="Industry"
           name="industry"
@@ -202,8 +204,8 @@ const SignUpEmployer = ({ usertype }) => {
           }}
         />
 
-        <label for="employees">Number of Employees</label>
-        <input
+        <Label for="employees">Number of Employees</Label>
+        <Input
           type="text"
           placeholder="This can be an approximate number"
           name="employees"
@@ -215,8 +217,8 @@ const SignUpEmployer = ({ usertype }) => {
           }}
         />
 
-        <label for="location">Location</label>
-        <input
+        <Label for="location">Location</Label>
+        <Input
           type="text"
           placeholder="Headquarters, main locations, etc."
           name="location"
@@ -228,8 +230,8 @@ const SignUpEmployer = ({ usertype }) => {
           }}
         />
 
-        <label for="founded">When Was Your Company Founded?</label>
-        <input
+        <Label for="founded">When Was Your Company Founded?</Label>
+        <Input
           type="text"
           placeholder="Year of foundation"
           name="founded"
@@ -241,8 +243,8 @@ const SignUpEmployer = ({ usertype }) => {
           }}
         />
 
-        <label for="type">Company Type</label>
-        <select
+        <Label for="type">Company Type</Label>
+        <Select
           name="type"
           onChange={(ev) => {
             setEmployerFormData({
@@ -263,10 +265,10 @@ const SignUpEmployer = ({ usertype }) => {
           <option value="Nonprofit">Nonprofit</option>
           <option value="Cooperative">Cooperative</option>
           <option value="Other">Other</option>
-        </select>
+        </Select>
 
-        <label for="specialties">Specialties</label>
-        <textarea
+        <Label for="specialties">Specialties</Label>
+        <TextArea
           placeholder="List your company's specialties"
           name="specialties"
           onChange={(ev) => {
@@ -275,12 +277,12 @@ const SignUpEmployer = ({ usertype }) => {
               specialties: ev.target.value,
             });
           }}
-        ></textarea>
+        ></TextArea>
 
-        <label for="benefits">
+        <Label for="benefits">
           List a Few of Your Employee Benefits and Perks
-        </label>
-        <input
+        </Label>
+        <Input
           type="text"
           placeholder="Benefits and perks"
           name="benefits"
@@ -292,17 +294,146 @@ const SignUpEmployer = ({ usertype }) => {
           }}
         />
 
-        <div>
+        <ButtonContainer>
           <div>
-            <button type="reset">Clear</button>
+            <ClearButton type="reset">Clear</ClearButton>
           </div>
           <div>
-            <button type="submit">Submit</button>
+            <SubmitButton type="submit">Submit</SubmitButton>
           </div>
-        </div>
-      </form>
-    </div>
+        </ButtonContainer>
+      </Form>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  width: 100vw;
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;
+
+const Form = styled.form`
+  font-family: "Roboto", sans-serif;
+  text-align: left;
+  width: 51%;
+  background: #fff;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 0 auto;
+`;
+
+const FormTitle = styled.p`
+  font-family: "Poppins", sans-serif;
+  color: #004ddb;
+  font-weight: 600;
+  font-size: 20px;
+`;
+
+const Label = styled.label`
+  margin-top: 15px;
+  margin-bottom: 4px;
+  font-weight: 600;
+`;
+
+const Input = styled.input`
+  height: 40px;
+  font-size: 16px;
+  padding: 6px;
+  font-family: "Roboto", sans-serif;
+  border-radius: 5px;
+  border: solid 1px;
+`;
+
+const Select = styled.select`
+  height: 40px;
+  font-size: 16px;
+  padding: 6px;
+  font-family: "Roboto", sans-serif;
+  border-radius: 5px;
+  border: solid 1px;
+`;
+
+const TextArea = styled.textarea`
+  height: 120px;
+  font-size: 16px;
+  padding: 6px;
+  font-family: "Roboto", sans-serif;
+  resize: none;
+  border-radius: 5px;
+  border: solid 1px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  width: 51%;
+  margin: 0 auto;
+  justify-content: space-evenly;
+`;
+
+const ClearButton = styled.button`
+  padding: 8px 22px;
+  width: 125px;
+  font-weight: 600;
+  color: #00ced1;
+  display: inline-block;
+  border-radius: 10px;
+  text-transform: uppercase;
+  position: relative;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 20px;
+  border: solid 3px #00ced1;
+`;
+
+const SubmitButton = styled.button`
+  padding: 11px 25px;
+  width: 125px;
+  font-weight: 600;
+  color: white;
+  display: inline-block;
+  border-radius: 10px;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 20px;
+  border: none;
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00ced1;
+    z-index: -2;
+  }
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #004ddb;
+    transition: all 0.3s;
+    z-index: -1;
+  }
+  &:hover {
+    color: #fff;
+    &:before {
+      width: 100%;
+    }
+  }
+`;
 
 export default SignUpEmployer;

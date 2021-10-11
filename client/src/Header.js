@@ -78,6 +78,7 @@ const Wrapper = styled.header`
   top: 0;
   border-bottom: solid 4px #00ced1;
   z-index: 100;
+  margin-bottom: 20px;
 `;
 
 const SiteNameDiv = styled.div`

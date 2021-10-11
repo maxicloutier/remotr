@@ -149,18 +149,24 @@ const MyCandidateProfile = () => {
             {jobApplications ? (
               jobApplications.map((application) => {
                 return (
-                  <ApplicationLinks
-                    to={`/application/${application._id}`}
-                    key={application._id}
-                  >
-                    <CompanyLogo
-                      src={application.company_logo_url}
-                      alt="Company logo"
-                    />
-                    <p>{application.company_name}</p>
-                    <p>{application.title}</p>
-                    <p>{application.date}</p>
-                  </ApplicationLinks>
+                  <JobContainer>
+                    <ApplicationLinks
+                      to={`/application/${application._id}`}
+                      key={application._id}
+                    >
+                      <div>
+                        <CompanyLogo
+                          src={application.company_logo_url}
+                          alt="Company logo"
+                        />
+                      </div>
+                      <div>
+                        <p>{application.company_name}</p>
+                        <JobTitle>{application.title}</JobTitle>
+                        <p>Applied {application.date}</p>
+                      </div>
+                    </ApplicationLinks>
+                  </JobContainer>
                 );
               })
             ) : (
@@ -207,8 +213,9 @@ const SecondWrapper = styled.div`
 const ProfileTitle = styled.p`
   color: #00ced1;
   font-family: "Poppins", sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 22px;
+  margin-top: 20px;
 `;
 
 const CandidateName = styled.p`
@@ -216,18 +223,17 @@ const CandidateName = styled.p`
   font-weight: 600;
   font-size: 35px;
   color: #004ddb;
-  line-height: 1.3;
+  line-height: 1;
   margin-top: 15px;
 
   span {
     color: black;
     font-size: 14px;
-    line-height: 1;
   }
 `;
 
 const Details = styled.div`
-  margin: 10px 0 10px 0;
+  margin: 20px 0 20px 0;
 `;
 
 const ContentTitles = styled.p`
@@ -248,7 +254,7 @@ const TextBody = styled.p`
 `;
 
 const CandidateDetails = styled.div`
-  padding: 20px 20px 20px 30px;
+  padding: 0 20px 20px 30px;
   height: auto;
   margin-top: 20px;
 `;
@@ -285,14 +291,7 @@ const SideBar = styled.div`
   border: solid gainsboro 1px;
   box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
   border-radius: 10px;
-
   margin-top: 20px;
-  &:hover,
-  &:active {
-    @include transition(all 0.2s ease-in-out);
-    text-decoration: none;
-    background: darken(#8be5b1, 15%);
-  }
 `;
 
 const SignOutButton = styled.button`
@@ -347,7 +346,13 @@ const CompanyLogo = styled.img`
   max-width: 80px;
   max-height: 80px;
   object-fit: contain;
-  margin: 5px;
+  margin-right: 20px;
+`;
+
+const JobContainer = styled.div`
+  border-top: solid 2px #00ced1;
+  margin: 20px 0 20px 0;
+  padding-top: 10px;
 `;
 
 const ApplicationLinks = styled(Link)`
@@ -357,6 +362,13 @@ const ApplicationLinks = styled(Link)`
   font-size: 18px;
   line-height: 1.5;
   color: black;
+  display: flex;
+`;
+
+const JobTitle = styled.p`
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
 `;
 
 export default MyCandidateProfile;

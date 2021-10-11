@@ -91,13 +91,15 @@ const PostJob = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmitJob}>
-        <img src={currentUser.logo} alt="Company Logo" />
-        <p>{currentUser.name}</p>
+    <Wrapper>
+      <Form onSubmit={handleSubmitJob}>
+        <TopContainer>
+          <Logo src={currentUser.logo} alt="Company Logo" />
+          <CompanyName>Post a New {currentUser.name} Job</CompanyName>
+        </TopContainer>
 
-        <label for="title">Job Title</label>
-        <input
+        <Label for="title">Job Title</Label>
+        <Input
           type="text"
           placeholder="Job Title"
           name="title"
@@ -109,8 +111,8 @@ const PostJob = () => {
           }}
         />
 
-        <label for="category">Category</label>
-        <input
+        <Label for="category">Category</Label>
+        <Input
           type="text"
           placeholder="Category"
           name="category"
@@ -122,10 +124,10 @@ const PostJob = () => {
           }}
         />
 
-        <label for="candidate_required_location">
+        <Label for="candidate_required_location">
           Candidate Required Location
-        </label>
-        <input
+        </Label>
+        <Input
           type="text"
           placeholder="Candidate Required Location"
           name="candidate_required_location"
@@ -137,8 +139,8 @@ const PostJob = () => {
           }}
         />
 
-        <label for="description">Detailed Job Description</label>
-        <textarea
+        <Label for="description">Detailed Job Description</Label>
+        <TextArea
           placeholder="Include an introduction of the job and its context, and make sure to describe the responsibilities and qualifications needed. The job description must be at least 700 characters long, but shouldn't be too long either."
           name="description"
           onChange={(ev) => {
@@ -147,10 +149,10 @@ const PostJob = () => {
               description: ev.target.value,
             });
           }}
-        ></textarea>
+        ></TextArea>
 
-        <label for="salary">Salary</label>
-        <input
+        <Label for="salary">Salary</Label>
+        <Input
           type="text"
           placeholder="Salary"
           name="salary"
@@ -162,8 +164,8 @@ const PostJob = () => {
           }}
         />
 
-        <label for="job_type">Job Type</label>
-        <select
+        <Label for="job_type">Job Type</Label>
+        <Select
           name="job_type"
           onChange={(ev) => {
             setFormData({
@@ -186,18 +188,18 @@ const PostJob = () => {
           <option value="Seasonal">Seasonal</option>
           <option value="Independent Contractor">Independent Contractor</option>
           <option value="Other">Other</option>
-        </select>
+        </Select>
 
-        <div>
+        <ButtonContainer>
           <div>
-            <button type="reset">Clear</button>
+            <ClearButton type="reset">Clear</ClearButton>
           </div>
           <div>
-            <button type="submit">Submit</button>
+            <SubmitButton type="submit">Submit</SubmitButton>
           </div>
-        </div>
-      </form>
-    </div>
+        </ButtonContainer>
+      </Form>
+    </Wrapper>
   );
 };
 
@@ -214,6 +216,148 @@ const Loading = styled.div`
   transform: translateY(-50%);
   width: 100vw;
   text-align: -webkit-center;
+`;
+
+const Wrapper = styled.div`
+  width: 100vw;
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;
+
+const Form = styled.form`
+  font-family: "Roboto", sans-serif;
+  text-align: left;
+  width: 70%;
+  background: #fff;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 0 auto;
+`;
+
+const Label = styled.label`
+  margin-top: 15px;
+  margin-bottom: 4px;
+  font-weight: 600;
+`;
+
+const Input = styled.input`
+  height: 40px;
+  font-size: 16px;
+  padding: 6px;
+  font-family: "Roboto", sans-serif;
+  border-radius: 5px;
+  border: solid 1px;
+`;
+
+const Select = styled.select`
+  height: 40px;
+  font-size: 16px;
+  padding: 6px;
+  font-family: "Roboto", sans-serif;
+  border-radius: 5px;
+  border: solid 1px;
+`;
+
+const TextArea = styled.textarea`
+  height: 500px;
+  font-size: 16px;
+  padding: 6px;
+  font-family: "Roboto", sans-serif;
+  resize: none;
+  border-radius: 5px;
+  border: solid 1px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  width: 51%;
+  margin: 0 auto;
+  justify-content: space-evenly;
+`;
+
+const ClearButton = styled.button`
+  padding: 8px 22px;
+  width: 125px;
+  font-weight: 600;
+  color: #00ced1;
+  display: inline-block;
+  border-radius: 10px;
+  text-transform: uppercase;
+  position: relative;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 20px;
+  border: solid 3px #00ced1;
+`;
+
+const SubmitButton = styled.button`
+  padding: 11px 25px;
+  width: 125px;
+  font-weight: 600;
+  color: white;
+  display: inline-block;
+  border-radius: 10px;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 20px;
+  border: none;
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00ced1;
+    z-index: -2;
+  }
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #004ddb;
+    transition: all 0.3s;
+    z-index: -1;
+  }
+  &:hover {
+    color: #fff;
+    &:before {
+      width: 100%;
+    }
+  }
+`;
+
+const TopContainer = styled.div`
+  display: flex;
+  justify-self: center;
+`;
+
+const Logo = styled.img`
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+`;
+
+const CompanyName = styled.h1`
+  font-family: "Poppins", sans-serif;
+  color: #004ddb;
+  font-weight: 600;
+  font-size: 30px;
+  align-self: center;
+  margin-left: 10px;
 `;
 
 export default PostJob;

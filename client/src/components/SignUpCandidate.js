@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Context } from "../Context";
 import { useHistory } from "react-router-dom";
 
@@ -88,8 +88,10 @@ const SignUpCandidate = ({ usertype }) => {
   return (
     <Wrapper>
       <Form onSubmit={handleSubmitCandidate}>
-        <label for="_id">Username</label>
-        <input
+        <FormTitle>Candidate Form</FormTitle>
+
+        <Label for="_id">Username</Label>
+        <Input
           type="text"
           placeholder="Username"
           name="_id"
@@ -101,8 +103,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="email">Email</label>
-        <input
+        <Label for="email">Email</Label>
+        <Input
           type="email"
           placeholder="Email"
           name="email"
@@ -114,8 +116,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="password">Password</label>
-        <input
+        <Label for="password">Password</Label>
+        <Input
           type="password"
           placeholder="Password"
           name="password"
@@ -127,8 +129,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="confirm_password">Confirm Password</label>
-        <input
+        <Label for="confirm_password">Confirm Password</Label>
+        <Input
           type="password"
           placeholder="Confirm password"
           name="confirm_password"
@@ -140,8 +142,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="picture">Link to Your Profile Picture</label>
-        <input
+        <Label for="picture">Link to Your Profile Picture</Label>
+        <Input
           type="url"
           placeholder="Add link here"
           name="picture"
@@ -153,8 +155,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="name">Full Name</label>
-        <input
+        <Label for="name">Full Name</Label>
+        <Input
           type="text"
           placeholder="Full name"
           name="name"
@@ -166,8 +168,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="pronouns">Pronouns</label>
-        <select
+        <Label for="pronouns">Pronouns</Label>
+        <Select
           name="pronouns"
           onChange={(ev) => {
             setCandidateFormData({
@@ -187,10 +189,10 @@ const SignUpCandidate = ({ usertype }) => {
           <option value="Xe/Xem">Xe/Xem</option>
           <option value="Other">Other</option>
           <option value="Prefer not to answer">Prefer not to answer</option>
-        </select>
+        </Select>
 
-        <label for="location">Current Location</label>
-        <input
+        <Label for="location">Current Location</Label>
+        <Input
           type="text"
           placeholder="Current location"
           name="location"
@@ -202,8 +204,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="timezone">Time Zone</label>
-        <select
+        <Label for="timezone">Time Zone</Label>
+        <Select
           name="timezone"
           onChange={(ev) => {
             setCandidateFormData({
@@ -240,10 +242,10 @@ const SignUpCandidate = ({ usertype }) => {
           <option value="UTC +10 hours">UTC +10 hours</option>
           <option value="UTC +11 hours">UTC +11 hours</option>
           <option value="UTC +12 hours">UTC +12 hours</option>
-        </select>
+        </Select>
 
-        <label for="phone">Phone Number</label>
-        <input
+        <Label for="phone">Phone Number</Label>
+        <Input
           type="tel"
           placeholder="Phone number"
           name="phone"
@@ -255,8 +257,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="languages">Languages</label>
-        <input
+        <Label for="languages">Languages</Label>
+        <Input
           type="text"
           placeholder="What languages do you speak?"
           name="languages"
@@ -268,8 +270,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="title">Profile Headline</label>
-        <input
+        <Label for="title">Profile Headline</Label>
+        <Input
           type="text"
           placeholder="Profile headline"
           name="title"
@@ -281,8 +283,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="about">Tell Us About Yourself</label>
-        <textarea
+        <Label for="about">Tell Us About Yourself</Label>
+        <TextArea
           placeholder="Who are you? Professionally and personally. Here is the place to introduce yourself in a unique way to employers!"
           name="about"
           onChange={(ev) => {
@@ -291,10 +293,10 @@ const SignUpCandidate = ({ usertype }) => {
               about: ev.target.value,
             });
           }}
-        ></textarea>
+        ></TextArea>
 
-        <label for="skills">List Your Main Skills Here</label>
-        <input
+        <Label for="skills">List Your Main Skills Here</Label>
+        <Input
           type="text"
           placeholder="For example, Web Development, Social Media, Leadership..."
           name="skills"
@@ -306,8 +308,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="looking">What Are You Looking For?</label>
-        <textarea
+        <Label for="looking">What Are You Looking For?</Label>
+        <TextArea
           placeholder="What kind of opportunities are you looking for or interested in? What's important to you in a job?"
           name="looking"
           onChange={(ev) => {
@@ -316,10 +318,10 @@ const SignUpCandidate = ({ usertype }) => {
               looking: ev.target.value,
             });
           }}
-        ></textarea>
+        ></TextArea>
 
-        <label for="position">Current Position</label>
-        <input
+        <Label for="position">Current Position</Label>
+        <Input
           type="text"
           placeholder="If not applicable, write N/A"
           name="position"
@@ -331,8 +333,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="employer">Current Employer</label>
-        <input
+        <Label for="employer">Current Employer</Label>
+        <Input
           type="text"
           placeholder="If not applicable, write N/A"
           name="employer"
@@ -344,8 +346,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="degree">Most Relevant or Latest Degree/Training</label>
-        <input
+        <Label for="degree">Most Relevant or Latest Degree/Training</Label>
+        <Input
           type="text"
           placeholder="Degree/training"
           name="degree"
@@ -357,8 +359,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="school">Educational Institution</label>
-        <input
+        <Label for="school">Educational Institution</Label>
+        <Input
           type="text"
           placeholder="University, school, association, etc."
           name="school"
@@ -370,8 +372,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="degree_duration">Degree Duration</label>
-        <input
+        <Label for="degree_duration">Degree Duration</Label>
+        <Input
           type="text"
           placeholder="Start and end of your degree"
           name="degree_duration"
@@ -383,8 +385,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="hobbies">Hobbies</label>
-        <input
+        <Label for="hobbies">Hobbies</Label>
+        <Input
           type="text"
           placeholder="Life's not all about work! What do you enjoy to do for fun?"
           name="hobbies"
@@ -396,8 +398,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="linkedin">Link Your LinkedIn Profile Here</label>
-        <input
+        <Label for="linkedin">Link Your LinkedIn Profile Here</Label>
+        <Input
           type="url"
           placeholder="Optional, but recommended!"
           name="linkedin"
@@ -409,8 +411,8 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <label for="instagram">Link Your Instagram Profile Here</label>
-        <input
+        <Label for="instagram">Link Your Instagram Profile Here</Label>
+        <Input
           type="url"
           placeholder="Optional, but recommended!"
           name="instagram"
@@ -422,37 +424,146 @@ const SignUpCandidate = ({ usertype }) => {
           }}
         />
 
-        <div>
+        <ButtonContainer>
           <div>
-            <button type="reset">Clear</button>
+            <ClearButton type="reset">Clear</ClearButton>
           </div>
           <div>
-            <button type="submit">Submit</button>
+            <SubmitButton type="submit">Submit</SubmitButton>
           </div>
-        </div>
+        </ButtonContainer>
       </Form>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  width: 100%;
+  width: 100vw;
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 const Form = styled.form`
   font-family: "Roboto", sans-serif;
   text-align: left;
-  width: 50%;
+  width: 51%;
   background: #fff;
-  box-shadow: 0 10px 15px rgba(179, 179, 179, 0.7);
-
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   padding: 1rem;
   margin: 0 auto;
+`;
 
-  background-color: blue;
+const FormTitle = styled.p`
+  font-family: "Poppins", sans-serif;
+  color: #004ddb;
+  font-weight: 600;
+  font-size: 20px;
+`;
+
+const Label = styled.label`
+  margin-top: 15px;
+  margin-bottom: 4px;
+  font-weight: 600;
+`;
+
+const Input = styled.input`
+  height: 40px;
+  font-size: 16px;
+  padding: 6px;
+  font-family: "Roboto", sans-serif;
+  border-radius: 5px;
+  border: solid 1px;
+`;
+
+const Select = styled.select`
+  height: 40px;
+  font-size: 16px;
+  padding: 6px;
+  font-family: "Roboto", sans-serif;
+  border-radius: 5px;
+  border: solid 1px;
+`;
+
+const TextArea = styled.textarea`
+  height: 120px;
+  font-size: 16px;
+  padding: 6px;
+  font-family: "Roboto", sans-serif;
+  resize: none;
+  border-radius: 5px;
+  border: solid 1px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  width: 51%;
+  margin: 0 auto;
+  justify-content: space-evenly;
+`;
+
+const ClearButton = styled.button`
+  padding: 8px 22px;
+  width: 125px;
+  font-weight: 600;
+  color: #00ced1;
+  display: inline-block;
+  border-radius: 10px;
+  text-transform: uppercase;
+  position: relative;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 20px;
+  border: solid 3px #00ced1;
+`;
+
+const SubmitButton = styled.button`
+  padding: 11px 25px;
+  width: 125px;
+  font-weight: 600;
+  color: white;
+  display: inline-block;
+  border-radius: 10px;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 20px;
+  border: none;
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00ced1;
+    z-index: -2;
+  }
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #004ddb;
+    transition: all 0.3s;
+    z-index: -1;
+  }
+  &:hover {
+    color: #fff;
+    &:before {
+      width: 100%;
+    }
+  }
 `;
 
 export default SignUpCandidate;

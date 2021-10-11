@@ -45,79 +45,95 @@ const PublicCandidateProfile = () => {
   }
 
   return (
-    <div>
-      <div>
-        <img src={candidate.picture} alt="User profile picture" />;
-      </div>
-      <div>
-        <h2>{candidate.name}</h2>
-        <p>{candidate.pronouns}</p>
-        <p>Username: {candidate._id}</p>
-        <p>{candidate.title}</p>
-        <p>Member Since: {candidate.member_since}</p>
-      </div>
+    <Wrapper>
+      <SecondWrapper>
+        <ProfileContainer>
+          <SideBar>
+            <div>
+              <Picture src={candidate.picture} alt="User profile picture" />
+            </div>
 
-      <p>Location: {candidate.location}</p>
-      <p>UTC Time Zone: {candidate.timezone}</p>
-      <p>Languages: {candidate.languages}</p>
+            <CandidateName>
+              {candidate.name} <span>{candidate.pronouns}</span>
+            </CandidateName>
+            <ProfileTitle>{candidate.title}</ProfileTitle>
+            <TextBody style={{ fontSize: "14px" }}>
+              Member Since {candidate.member_since}
+            </TextBody>
 
-      <div>
-        <h3>Contact Information</h3>
-        <p>{candidate.email}</p>
-        <p>{candidate.phone}</p>
-      </div>
+            <Details>
+              <TextBody style={{ fontWeight: "bold" }}>
+                {candidate.location}
+              </TextBody>
 
-      <div>
-        <h3>About Me</h3>
-        <p>{candidate.about}</p>
-      </div>
+              <TextBody>{candidate.timezone}</TextBody>
+              <TextBody>Languages: {candidate.languages}</TextBody>
+              <TextBody>Username: {candidate._id}</TextBody>
+            </Details>
+            <div>
+              <ContactTitle>Contact Information</ContactTitle>
+              <TextBody>{candidate.email}</TextBody>
+              <TextBody>{candidate.phone}</TextBody>
+            </div>
+          </SideBar>
+          <CandidateDetails>
+            <div>
+              <ContentTitles>About Me</ContentTitles>
+              <TextBody>{candidate.about}</TextBody>
+            </div>
 
-      <div>
-        <h3>My Skills</h3>
-        <p>{candidate.skills}</p>
-      </div>
+            <div>
+              <ContentTitles>My Skills</ContentTitles>
+              <TextBody>{candidate.skills}</TextBody>
+            </div>
 
-      <div>
-        <h3>Current Employment</h3>
-        <p>
-          {candidate.position} @ {candidate.employer}
-        </p>
-      </div>
+            <div>
+              <ContentTitles>Current Employment</ContentTitles>
+              <TextBody>
+                {candidate.position} @ {candidate.employer}
+              </TextBody>
+            </div>
 
-      <div>
-        <h3>Most Relevant or Latest Degree/Training</h3>
-        <p>{candidate.degree}</p>
-        <p>{candidate.school}</p>
-        <p>{candidate.degree_duration}</p>
-      </div>
+            <div>
+              <ContentTitles>
+                Most Relevant or Latest Degree/Training
+              </ContentTitles>
+              <TextBody>{candidate.degree}</TextBody>
+              <TextBody>{candidate.school}</TextBody>
+              <TextBody>{candidate.degree_duration}</TextBody>
+            </div>
 
-      <div>
-        <h3>What I’m Looking For</h3>
-        <p>{candidate.looking}</p>
-      </div>
+            <div>
+              <ContentTitles>What I’m Looking For</ContentTitles>
+              <TextBody>{candidate.looking}</TextBody>
+            </div>
 
-      <div>
-        <h3>Social</h3>
+            <div>
+              <ContentTitles>Social</ContentTitles>
 
-        <a href={candidate.linkedin} target="_blank">
-          <img src="/assets/social/linkedin-logo.png" alt="LinkedIn logo" />
-        </a>
+              <a href={candidate.linkedin} target="_blank">
+                <SocialLogo
+                  src="/assets/social/linkedin-logo.png"
+                  alt="LinkedIn logo"
+                />
+              </a>
 
-        <a href={candidate.instagram} target="_blank">
-          <img src="/assets/social/instagram-logo.jpeg" alt="Instagram logo" />
-        </a>
-      </div>
+              <a href={candidate.instagram} target="_blank">
+                <SocialLogo
+                  src="/assets/social/instagram-logo.jpeg"
+                  alt="Instagram logo"
+                />
+              </a>
+            </div>
 
-      <div>
-        <h3>What I’m Looking For</h3>
-        <p>{candidate.looking}</p>
-      </div>
-
-      <div>
-        <h3>My Hobbies</h3>
-        <p>{candidate.hobbies}</p>
-      </div>
-    </div>
+            <div>
+              <ContentTitles>My Hobbies</ContentTitles>
+              <TextBody>{candidate.hobbies}</TextBody>
+            </div>
+          </CandidateDetails>
+        </ProfileContainer>
+      </SecondWrapper>
+    </Wrapper>
   );
 };
 
@@ -134,6 +150,104 @@ const Loading = styled.div`
   transform: translateY(-50%);
   width: 100vw;
   text-align: -webkit-center;
+`;
+
+const Wrapper = styled.div`
+  width: 100vw;
+`;
+
+const SecondWrapper = styled.div`
+  width: 80%;
+  margin: 0;
+  text-align: left;
+  height: auto;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+`;
+
+const ProfileTitle = styled.p`
+  color: #00ced1;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  margin-top: 20px;
+`;
+
+const CandidateName = styled.p`
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 35px;
+  color: #004ddb;
+  line-height: 1;
+  margin-top: 15px;
+
+  span {
+    color: black;
+    font-size: 14px;
+  }
+`;
+
+const Details = styled.div`
+  margin: 20px 0 20px 0;
+`;
+
+const ContentTitles = styled.p`
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: #004ddb;
+  line-height: 1;
+  margin-top: 20px;
+  margin-bottom: 10px;
+`;
+
+const TextBody = styled.p`
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.5;
+`;
+
+const CandidateDetails = styled.div`
+  padding: 0 20px 20px 30px;
+  height: auto;
+  margin-top: 20px;
+`;
+
+const ProfileContainer = styled.div`
+  display: flex;
+`;
+
+const Picture = styled.img`
+  width: 450px;
+  height: 450px;
+  object-fit: cover;
+`;
+
+const SocialLogo = styled.img`
+  width: 100px;
+  margin: 5px 10px 0px 5px;
+`;
+
+const ContactTitle = styled.p`
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: #004ddb;
+  line-height: 1.5;
+  margin-top: 20px;
+`;
+
+const SideBar = styled.div`
+  width: 500px;
+  padding: 20px;
+  height: auto;
+  background: white;
+  border: solid gainsboro 1px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
+  border-radius: 10px;
+  margin-top: 20px;
 `;
 
 export default PublicCandidateProfile;

@@ -45,45 +45,56 @@ const PublicEmployerProfile = () => {
   }
 
   return (
-    <div>
-      <div>
-        <img src={employer.logo} alt="User profile picture" />;
-      </div>
-      <div>
-        <h2>{employer.name}</h2>
-        <p>{employer.slogan}</p>
-        <p>{employer.industry}</p>
-        <a href={employer.website} target="_blank">
-          Website
-        </a>
-        <p>Location: {employer.location}</p>
-      </div>
+    <Wrapper>
+      <SecondWrapper>
+        <ProfileContainer>
+          <SideBar>
+            <div>
+              <Picture src={employer.logo} alt="User profile picture" />
+            </div>
 
-      <p>Type: {employer.type}</p>
-      <p>Founded: {employer.founded}</p>
-      <p>Number of Employees: {employer.employees}</p>
+            <EmployerName>{employer.name}</EmployerName>
 
-      <div>
-        <h3>Account Information</h3>
-        <p>Email: {employer.email}</p>
-        <p>Username: {employer._id}</p>
-      </div>
+            <TextBody>{employer.industry}</TextBody>
 
-      <div>
-        <h3>About {employer.name}</h3>
-        <p>{employer.about}</p>
-      </div>
+            <Slogan>{employer.slogan}</Slogan>
 
-      <div>
-        <h3>Specialties</h3>
-        <p>{employer.specialties}</p>
-      </div>
+            <Details>
+              <TextBody style={{ fontWeight: "bold" }}>
+                {employer.location}
+              </TextBody>
 
-      <div>
-        <h3>Employee Benefits</h3>
-        <p>{employer.benefits}</p>
-      </div>
-    </div>
+              <TextBody>Type: {employer.type}</TextBody>
+
+              <TextBody>Founded: {employer.founded}</TextBody>
+
+              <TextBody>Number of Employees: {employer.employees}</TextBody>
+
+              <Website href={employer.website} target="_blank">
+                Website
+              </Website>
+            </Details>
+          </SideBar>
+
+          <EmployerDetails>
+            <div>
+              <ContentTitles>About {employer.name} </ContentTitles>
+              <TextBody>{employer.about}</TextBody>
+            </div>
+
+            <div>
+              <ContentTitles>Specialties</ContentTitles>
+              <TextBody>{employer.specialties}</TextBody>
+            </div>
+
+            <div>
+              <ContentTitles>Employee Benefits</ContentTitles>
+              <TextBody>{employer.benefits}</TextBody>
+            </div>
+          </EmployerDetails>
+        </ProfileContainer>
+      </SecondWrapper>
+    </Wrapper>
   );
 };
 
@@ -100,6 +111,98 @@ const Loading = styled.div`
   transform: translateY(-50%);
   width: 100vw;
   text-align: -webkit-center;
+`;
+
+const Wrapper = styled.div`
+  width: 100vw;
+`;
+
+const SecondWrapper = styled.div`
+  width: 80%;
+  margin: 0;
+  text-align: left;
+  height: auto;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+`;
+
+const Slogan = styled.p`
+  color: #00ced1;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  margin-top: 20px;
+`;
+
+const EmployerName = styled.p`
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 35px;
+  color: #004ddb;
+  line-height: 1;
+  margin-top: 15px;
+
+  span {
+    color: black;
+    font-size: 14px;
+  }
+`;
+
+const Details = styled.div`
+  margin: 20px 0 20px 0;
+`;
+
+const ContentTitles = styled.p`
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: #004ddb;
+  line-height: 1;
+  margin-top: 20px;
+  margin-bottom: 10px;
+`;
+
+const TextBody = styled.p`
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.5;
+`;
+
+const EmployerDetails = styled.div`
+  padding: 0 20px 20px 30px;
+  height: auto;
+  margin-top: 20px;
+`;
+
+const ProfileContainer = styled.div`
+  display: flex;
+`;
+
+const Picture = styled.img`
+  width: 450px;
+  height: 450px;
+  object-fit: contain;
+`;
+
+const SideBar = styled.div`
+  width: 500px;
+  padding: 20px;
+  height: auto;
+  background: white;
+  border: solid gainsboro 1px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
+  border-radius: 10px;
+  margin-top: 20px;
+`;
+
+const Website = styled.a`
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #00ced1;
 `;
 
 export default PublicEmployerProfile;

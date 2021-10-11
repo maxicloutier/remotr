@@ -92,6 +92,7 @@ const Jobs = () => {
 
 const Wrapper = styled.div`
   width: 100vw;
+  margin-bottom: 20px;
 `;
 
 const PageTitle = styled.h1`
@@ -203,7 +204,6 @@ const JobCategory = styled.p`
 
 const JobSalary = styled.p`
   font-family: "Roboto", sans-serif;
-
   line-height: 1;
   font-weight: 500;
   font-size: 18px;
