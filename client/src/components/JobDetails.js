@@ -138,7 +138,7 @@ const JobDetails = () => {
 
         <SubTitles>Apply</SubTitles>
         <ApplyContainer>
-          {currentUser ? (
+          {currentUser && currentUser.usertype === "candidate" ? (
             <div>
               {jobDescription.exclusivity ? (
                 <div>
@@ -178,9 +178,9 @@ const JobDetails = () => {
                 </ApplyButtons>
               )}
               <Warning>
-                You must be a candidate member and be signed in to apply for a
-                job on Remotr or to save a Remotive job to your profile. Sign in
-                (or up!) now! ⬆️
+                You must be a <b>candidate member</b> and be <b>signed in</b> to
+                apply for a job on Remotr or to save a Remotive job to your
+                profile.
               </Warning>
             </div>
           )}
@@ -330,6 +330,7 @@ const ExternalLink = styled.a`
   overflow: hidden;
   z-index: 1;
   cursor: pointer;
+  font-size: 16px;
 
   &:after {
     content: "";
@@ -377,7 +378,6 @@ const SaveJobButton = styled.button`
   border: none;
   cursor: pointer;
   font-size: 16px;
-  margin-top: 20px;
 
   &:after {
     content: "";

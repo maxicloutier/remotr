@@ -281,7 +281,7 @@ const ButtonContainer = styled.div`
 
 const ClearButton = styled.button`
   padding: 8px 22px;
-  width: 125px;
+  width: 150px;
   font-weight: 600;
   color: #00ced1;
   display: inline-block;
@@ -296,7 +296,7 @@ const ClearButton = styled.button`
 
 const SubmitButton = styled.button`
   padding: 11px 25px;
-  width: 125px;
+  width: 150px;
   font-weight: 600;
   color: white;
   display: inline-block;
