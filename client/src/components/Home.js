@@ -80,7 +80,7 @@ const Content = styled.div`
   background: rgba(0, 0, 0, 0.6);
   color: #f1f1f1;
   width: 100%;
-  height: 45%;
+  height: 42%;
   padding: 30px 40px;
   z-index: 4;
   display: flex;
@@ -132,7 +132,7 @@ const SubParagraphs = styled.p`
   @media only screen and (max-width: 1800px) {
     margin-top: 17px;
     margin-bottom: 17px;
-    font-size: 16px;
+    font-size: 15.5px;
     font-weight: 500;
   }
 `;
